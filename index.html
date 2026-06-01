@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a6b3c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Health Tracker">
+<meta name="description" content="Health & Longevity Tracker — บันทึกสุขภาพส่วนตัว">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Health & Longevity Tracker</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --green: #1a6b3c;
+    --green-light: #EAF3DE;
+    --green-dark: #27500A;
+    --amber: #854F0B;
+    --amber-light: #FAEEDA;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --blue: #185FA5;
+    --blue-light: #E6F1FB;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f0; color: #1a1a1a; min-height: 100vh; }
+  .app { max-width: 430px; margin: 0 auto; background: #f0f2f0; min-height: 100vh; display: flex; flex-direction: column; position: relative; }
+
+  /* Header */
+  .header { background: var(--green); color: white; padding: 14px 16px 11px; position: sticky; top: 0; z-index: 100; }
+  .header-row { display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 16px; font-weight: 600; color: white; display: flex; align-items: center; gap: 6px; }
+  .header-sub { font-size: 11px; opacity: 0.8; margin-top: 2px; color: white; }
+
+  /* Nav */
+  .nav { background: white; border-top: 1px solid #e8e8e8; display: flex; position: sticky; bottom: 0; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+  .nav-btn { flex: 1; padding: 10px 2px 8px; border: none; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; color: #888; font-size: 10px; font-family: inherit; transition: color 0.15s; }
+  .nav-btn.active { color: var(--green); }
+  .nav-btn i { font-size: 20px; }
+
+  /* Content */
+  .content { flex: 1; padding: 10px; padding-bottom: 4px; }
+
+  /* Cards */
+  .card { background: white; border-radius: var(--radius-md); border: 1px solid #e8ede8; padding: 14px; margin-bottom: 10px; }
+  .card-title { font-size: 13px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+
+  /* Grid */
+  .g2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+
+  /* Stat cards */
+  .scard { background: #f5f7f5; border-radius: var(--radius-sm); padding: 11px 12px; }
+  .slabel { font-size: 11px; color: #666; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+  .sval { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+  .sunit { font-size: 11px; font-weight: 400; color: #888; }
+
+  /* Section label */
+  .sec { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.6px; margin: 14px 0 7px; }
+
+  /* Forms */
+  .form-group { margin-bottom: 11px; }
+  .flabel { font-size: 12px; color: #555; margin-bottom: 5px; display: block; font-weight: 500; }
+  input[type=number], input[type=date], input[type=text], input[type=time], select, textarea {
+    width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: var(--radius-sm);
+    background: white; color: #1a1a1a; font-size: 14px; font-family: inherit;
+    -webkit-appearance: none; appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,107,60,0.1); }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+  textarea { resize: vertical; min-height: 64px; }
+
+  /* Buttons */
+  .btn { width: 100%; padding: 13px; background: var(--green); color: white; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 6px; font-family: inherit; transition: opacity 0.15s; }
+  .btn:active { opacity: 0.85; transform: scale(0.99); }
+  .btn-outline { background: white; border: 1.5px solid var(--green); color: var(--green); }
+  .btn-sm { padding: 8px 14px; font-size: 13px; width: auto; margin-top: 0; }
+
+  /* Badges */
+  .badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .ok { background: var(--green-light); color: var(--green-dark); }
+  .warn { background: var(--amber-light); color: var(--amber); }
+  .bad { background: var(--red-light); color: var(--red); }
+  .low { background: var(--blue-light); color: var(--blue); }
+
+  /* Progress */
+  .prow { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .pbar { flex: 1; height: 7px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }
+  .pfill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+  /* Blood rows */
+  .blood-row { display: flex; align-items: center; padding: 9px 0; border-bottom: 1px solid #f0f0f0; }
+  .blood-row:last-child { border-bottom: none; }
+
+  /* Tabs */
+  .tab-row { display: flex; gap: 6px; margin-bottom: 10px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+  .tab-row::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap; color: #666; font-family: inherit; transition: all 0.15s; }
+  .tab-btn.active { background: var(--green); color: white; border-color: var(--green); }
+
+  /* Chart */
+  .chart-wrap { position: relative; height: 200px; margin: 6px 0; }
+
+  /* Habits */
+  .habit-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
+  .habit-item:last-child { border-bottom: none; }
+  .hcheck { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #ddd; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+  .hcheck.checked { background: var(--green); border-color: var(--green); color: white; }
+
+  /* Food */
+  .food-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .food-item:last-child { border-bottom: none; }
+
+  /* Reminder toggle */
+  .rem-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
+  .rem-item:last-child { border-bottom: none; }
+  .tog { width: 40px; height: 22px; border-radius: 11px; border: none; cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0; }
+  .tog.on { background: var(--green); }
+  .tog.off { background: #ccc; }
+  .tog::after { content: ''; position: absolute; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: white; transition: left 0.2s; }
+  .tog.on::after { left: 21px; }
+  .tog.off::after { left: 3px; }
+
+  /* Compare */
+  .compare-col { flex: 1; min-width: 0; }
+  .compare-val { font-size: 15px; font-weight: 600; text-align: center; }
+  .compare-lbl { font-size: 10px; color: #999; text-align: center; }
+
+  /* Goal row */
+  .goal-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .goal-row:last-child { border-bottom: none; }
+
+  /* Advice */
+  .advice-item { display: flex; gap: 9px; padding: 9px 0; border-bottom: 1px solid #f5f5f5; }
+  .advice-item:last-child { border-bottom: none; }
+
+  /* Summary rings */
+  .score-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+  .score-box { background: white; border: 1px solid #e8ede8; border-radius: var(--radius-md); padding: 13px 10px; text-align: center; }
+  .score-num { font-size: 32px; font-weight: 700; line-height: 1; }
+  .score-lbl { font-size: 11px; color: #888; margin-top: 4px; }
+  .score-grade { font-size: 12px; font-weight: 600; margin-top: 4px; }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--green); color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; z-index: 999; display: none; white-space: nowrap; }
+
+  /* Report */
+  .report-table td { padding: 5px 0; font-size: 13px; border-bottom: 1px solid #f5f5f5; }
+  .report-table td:last-child { text-align: right; font-weight: 600; }
+
+  /* Scrollbar */
+  .content { scrollbar-width: thin; scrollbar-color: #ddd transparent; }
+  .content::-webkit-scrollbar { width: 4px; }
+  .content::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
+  /* Bio age */
+  .bio-section { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+
+  /* Empty state */
+  .empty { text-align: center; padding: 24px; color: #999; }
+  .empty i { font-size: 32px; display: block; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="header-row">
+      <h1><i class="ti ti-heart-rate-monitor"></i> Health & Longevity</h1>
+      <i class="ti ti-bell" style="font-size:20px;opacity:0.85"></i>
+    </div>
+    <div class="header-sub" id="hdrDate"></div>
+  </div>
+
+  <div class="content" id="pg"></div>
+
+  <nav class="nav">
+    <button class="nav-btn active" onclick="go('dash')" id="nb-dash"><i class="ti ti-layout-dashboard"></i>ภาพรวม</button>
+    <button class="nav-btn" onclick="go('log')" id="nb-log"><i class="ti ti-pencil"></i>บันทึก</button>
+    <button class="nav-btn" onclick="go('blood')" id="nb-blood"><i class="ti ti-droplet"></i>เลือด</button>
+    <button class="nav-btn" onclick="go('food')" id="nb-food"><i class="ti ti-salad"></i>อาหาร</button>
+    <button class="nav-btn" onclick="go('more')" id="nb-more"><i class="ti ti-dots"></i>เพิ่มเติม</button>
+  </nav>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── STATE & LOCAL STORAGE ───────────────────────────────────────────────────
+const STORAGE_KEY = 'healthTracker_v1';
+
+function defaultState() {
+  return {
+    profile: { name: 'คุณวิโรจน์', age: 52 },
+    logs: [
+      { date: '2025-03-01', weight: 80, height: 173, waist: 93, bpSys: 143, bpDia: 93, steps: 5200, sleep: 6.5, sleepQ: 2 },
+      { date: '2025-04-01', weight: 78, height: 173, waist: 91, bpSys: 138, bpDia: 88, steps: 6800, sleep: 7, sleepQ: 3 },
+      { date: '2025-05-01', weight: 76, height: 173, waist: 89, bpSys: 132, bpDia: 84, steps: 7500, sleep: 7.5, sleepQ: 3 },
+      { date: '2025-06-01', weight: 74.5, height: 173, waist: 87, bpSys: 128, bpDia: 80, steps: 8200, sleep: 7.5, sleepQ: 4 },
+    ],
+    bloodHistory: [
+      { date: '2025-01-10', chol: 228, tg: 175, hdl: 44, ldl: 148, uric: 7.1, fbs: 104, creatinine: 1.0 },
+      { date: '2025-05-15', chol: 215, tg: 160, hdl: 48, ldl: 135, uric: 6.8, fbs: 98, creatinine: 1.0 },
+    ],
+    food: [
+      { name: 'ข้าวกล้อง + ไก่ต้ม', cal: 380, time: '08:00', type: 'เช้า' },
+      { name: 'ผัดผักรวม + ปลา', cal: 320, time: '12:30', type: 'กลางวัน' },
+      { name: 'สลัดผัก + ไข่', cal: 220, time: '18:00', type: 'เย็น' },
+      { name: 'กล้วย 1 ผล', cal: 90, time: '10:00', type: 'ว่าง' },
+    ],
+    reminders: [
+      { id: 1, icon: 'ti-droplet', text: 'ดื่มน้ำ 8 แก้ว/วัน', time: '09:00', on: true },
+      { id: 2, icon: 'ti-pill', text: 'กินยาเช้า', time: '08:00', on: true },
+      { id: 3, icon: 'ti-heart', text: 'วัดความดัน', time: '07:30', on: false },
+      { id: 4, icon: 'ti-moon', text: 'เตรียมนอน', time: '22:00', on: true },
+    ],
+    goals: { weight: 70, bpSys: 120, bpDia: 80, chol: 180, ldl: 100, steps: 10000 },
+    habits: [
+      { id: 1, icon: 'ti-droplet', text: 'ดื่มน้ำ 8 แก้ว', done: true },
+      { id: 2, icon: 'ti-run', text: 'ออกกำลังกาย ≥30 นาที', done: true },
+      { id: 3, icon: 'ti-yoga', text: 'ยืดเหยียด / Stretch', done: false },
+      { id: 4, icon: 'ti-walk', text: 'เดินหลังอาหารเย็น', done: true },
+      { id: 5, icon: 'ti-leaf', text: 'ทานผัก 2 กำมือ', done: true },
+      { id: 6, icon: 'ti-ban', text: 'งดน้ำหวาน / น้ำอัดลม', done: true },
+      { id: 7, icon: 'ti-moon', text: 'นอนหลับ ≥7 ชั่วโมง', done: false },
+    ],
+    moreTab: 'habits',
+    chartTab: 'weight',
+    bloodTab: 'result',
+    page: 'dash',
+    foodDate: new Date().toISOString().slice(0, 10),
+  };
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return defaultState();
+}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(S)); } catch (e) {}
+}
+
+let S = loadState();
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+const C = '#1a6b3c';
+const fmt = (n, d = 1) => Number(n).toFixed(d);
+const bmi = (w, h) => (w / ((h / 100) ** 2)).toFixed(1);
+const last = () => S.logs[S.logs.length - 1];
+const blood = () => S.bloodHistory[S.bloodHistory.length - 1];
+const prevBlood = () => S.bloodHistory.length > 1 ? S.bloodHistory[S.bloodHistory.length - 2] : null;
+const today = () => new Date().toISOString().slice(0, 10);
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 2200);
+}
+
+function pcolor(v) { return v >= 80 ? C : v >= 60 ? '#854F0B' : '#A32D2D'; }
+
+function badge(cls, lbl, ic) {
+  return `<span class="badge ${cls}"><i class="ti ${ic}" style="font-size:11px"></i>${lbl}</span>`;
+}
+
+function prow(lbl, pct, c) {
+  return `<div class="prow">
+    <span style="font-size:11px;color:#666;width:56px;flex-shrink:0">${lbl}</span>
+    <div class="pbar"><div class="pfill" style="width:${pct}%;background:${c}"></div></div>
+    <span style="font-size:11px;font-weight:600;color:${c};width:32px;text-align:right">${pct}%</span>
+  </div>`;
+}
+
+// ─── BLOOD STATUS ─────────────────────────────────────────────────────────────
+function bSt(key, val) {
+  const r = {
+    chol: { ok: 200, warn: 240 }, tg: { ok: 150, warn: 200 },
+    hdl: { loOk: 40, hiOk: 60, reverse: true },
+    ldl: { ok: 100, warn: 130 }, uric: { ok: 7, warn: 8.5 },
+    fbs: { ok: 100, warn: 126 }, creatinine: { lo: 0.6, ok: 1.2, warn: 1.5 },
+  };
+  const d = r[key]; if (!d) return { cls: 'ok', lbl: 'ปกติ', ic: 'ti-circle-check', sc: 80 };
+  if (d.reverse) {
+    if (val >= d.hiOk) return { cls: 'ok', lbl: 'ดีมาก', ic: 'ti-circle-check', sc: 100 };
+    if (val >= d.loOk) return { cls: 'warn', lbl: 'ต่ำเล็กน้อย', ic: 'ti-alert-triangle', sc: 60 };
+    return { cls: 'bad', lbl: 'ต่ำ', ic: 'ti-circle-x', sc: 20 };
+  }
+  if (d.lo && val < d.lo) return { cls: 'low', lbl: 'ต่ำ', ic: 'ti-arrow-down-circle', sc: 70 };
+  if (val <= d.ok) return { cls: 'ok', lbl: 'ปกติ', ic: 'ti-circle-check', sc: 100 };
+  if (d.warn && val <= d.warn) return { cls: 'warn', lbl: 'สูงเล็กน้อย', ic: 'ti-alert-triangle', sc: 60 };
+  return { cls: 'bad', lbl: 'สูง', ic: 'ti-circle-x', sc: 20 };
+}
+
+// ─── SCORES ───────────────────────────────────────────────────────────────────
+function calcScores() {
+  const l = last(); const b = blood(); const bmiV = parseFloat(bmi(l.weight, l.height));
+  const done = S.habits.filter(h => h.done).length;
+  const bmiSc = bmiV < 18.5 ? 60 : bmiV < 23 ? 100 : bmiV < 27.5 ? 70 : 40;
+  const bpSc = l.bpSys < 120 && l.bpDia < 80 ? 100 : l.bpSys < 130 ? 80 : l.bpSys < 140 ? 60 : 30;
+  const hSc = Math.round((done / S.habits.length) * 100);
+  const bKeys = ['chol', 'tg', 'hdl', 'ldl', 'uric', 'fbs', 'creatinine'];
+  const bAvg = Math.round(bKeys.reduce((a, k) => a + (bSt(k, b[k]).sc || 80), 0) / bKeys.length);
+  const stepSc = l.steps >= 10000 ? 100 : l.steps >= 7000 ? 80 : l.steps >= 5000 ? 60 : 40;
+  const sleepSc = l.sleep >= 7 && l.sleep <= 9 ? 100 : l.sleep >= 6 ? 70 : 40;
+  const health = Math.round(bmiSc * 0.12 + bpSc * 0.18 + hSc * 0.2 + bAvg * 0.28 + stepSc * 0.12 + sleepSc * 0.1);
+  const lon = Math.min(99, Math.round(bmiSc * 0.1 + bpSc * 0.2 + bAvg * 0.3 + stepSc * 0.15 + sleepSc * 0.15 + hSc * 0.1));
+  return { health, lon, bmiSc, bpSc, hSc, bAvg, stepSc, sleepSc };
+}
+
+function calcBioAge() {
+  const b = blood(); const l = last(); const bmiV = parseFloat(bmi(l.weight, l.height));
+  let delta = 0;
+  if (bmiV < 23) delta -= 2; else if (bmiV < 27.5) delta += 1; else delta += 4;
+  if (l.bpSys < 120) delta -= 2; else if (l.bpSys < 130) delta += 0; else if (l.bpSys < 140) delta += 2; else delta += 5;
+  if (b.chol < 200) delta -= 1; else if (b.chol < 240) delta += 1; else delta += 3;
+  if (b.hdl >= 60) delta -= 2; else if (b.hdl < 40) delta += 3;
+  if (b.ldl < 100) delta -= 1; else if (b.ldl >= 160) delta += 3; else if (b.ldl >= 130) delta += 1;
+  if (b.fbs < 100) delta -= 1; else if (b.fbs >= 126) delta += 4; else delta += 2;
+  if (b.uric < 7) delta -= 0.5; else delta += 1.5;
+  const done = S.habits.filter(h => h.done).length;
+  if (done >= 6) delta -= 2; else if (done < 4) delta += 2;
+  if ((l.steps || 0) >= 10000) delta -= 2; else if ((l.steps || 0) >= 7000) delta -= 1; else delta += 1;
+  if (l.sleep >= 7 && l.sleep <= 9) delta -= 1; else delta += 1.5;
+  return Math.round(S.profile.age + delta);
+}
+
+function gH(s) { return s >= 90 ? { g: 'ดีเยี่ยม', c: C } : s >= 75 ? { g: 'ดี', c: '#3B6D11' } : s >= 60 ? { g: 'พอใช้', c: '#854F0B' } : { g: 'ต้องปรับ', c: '#A32D2D' }; }
+function gL(s) { return s >= 85 ? { g: 'อายุยืนมาก', c: C } : s >= 70 ? { g: 'อายุยืนดี', c: '#3B6D11' } : s >= 55 ? { g: 'ปานกลาง', c: '#854F0B' } : { g: 'ควรดูแล', c: '#A32D2D' }; }
+
+function genAdvice() {
+  const b = blood(); const l = last(); const items = [];
+  if (b.ldl >= 130) items.push({ ic: 'ti-salad', cat: 'อาหาร', txt: 'ลดไขมันอิ่มตัว หลีกเลี่ยงหมูสามชั้น ของทอด เพิ่มปลาทะเล โอเมก้า 3', cls: 'warn' });
+  if (b.chol >= 200) items.push({ ic: 'ti-leaf', cat: 'อาหาร', txt: 'เพิ่มใยอาหาร ข้าวกล้อง ถั่ว ผัก ผลไม้ต่ำน้ำตาล ช่วยลด Cholesterol', cls: 'ok' });
+  if (b.tg >= 150) items.push({ ic: 'ti-ban', cat: 'อาหาร', txt: 'งดน้ำตาล เครื่องดื่มหวาน แป้งขัดขาว เพราะ Triglyceride สูง', cls: 'bad' });
+  if (b.hdl < 60) items.push({ ic: 'ti-run', cat: 'ออกกำลังกาย', txt: 'Cardio 30+ นาที/วัน อย่างน้อย 5 วัน/สัปดาห์ ช่วยเพิ่ม HDL', cls: 'ok' });
+  if (b.uric >= 7) items.push({ ic: 'ti-droplet', cat: 'อาหาร', txt: 'ดื่มน้ำ ≥2.5 ลิตร/วัน ลดเนื้อแดง เครื่องในสัตว์ เพื่อควบคุม Uric Acid', cls: 'warn' });
+  if (l.bpSys >= 130) items.push({ ic: 'ti-heart', cat: 'ออกกำลังกาย', txt: 'เดิน ว่ายน้ำ ปั่นจักรยาน ช่วยลดความดัน งดเกลือเกิน 6g/วัน', cls: 'warn' });
+  if ((l.steps || 0) < 8000) items.push({ ic: 'ti-walk', cat: 'กิจกรรม', txt: `ก้าวเดินวันนี้ ${(l.steps || 0).toLocaleString()} ก้าว — เป้าหมาย 10,000 ก้าว เพิ่มการเดินหลังอาหาร`, cls: 'warn' });
+  if (parseFloat(bmi(l.weight, l.height)) >= 25) items.push({ ic: 'ti-scale', cat: 'น้ำหนัก', txt: 'ลดแคลอรี่ 300–500 kcal/วัน ควบคู่ออกกำลังกาย เพื่อลดน้ำหนักยั่งยืน', cls: 'warn' });
+  if (items.length === 0) items.push({ ic: 'ti-star', cat: 'ดีมาก', txt: 'ค่าสุขภาพทุกด้านอยู่ในเกณฑ์ดี รักษาพฤติกรรมเดิมต่อไป!', cls: 'ok' });
+  return items;
+}
+
+const bDefs = {
+  chol: { lbl: 'Cholesterol', ref: 'เป้า <200 mg/dL' },
+  tg: { lbl: 'Triglyceride', ref: 'เป้า <150 mg/dL' },
+  hdl: { lbl: 'HDL (ไขมันดี)', ref: 'เป้า ≥40 mg/dL' },
+  ldl: { lbl: 'LDL (ไขมันเลว)', ref: 'เป้า <100 mg/dL' },
+  uric: { lbl: 'Uric Acid', ref: 'เป้า <7.0 mg/dL' },
+  fbs: { lbl: 'FBS (น้ำตาล)', ref: 'เป้า <100 mg/dL' },
+  creatinine: { lbl: 'Creatinine (ไต)', ref: 'ปกติ 0.6–1.2 mg/dL' },
+};
+
+// ─── PAGES ────────────────────────────────────────────────────────────────────
+let activeChart = null;
+
+function renderDash() {
+  const sc = calcScores(); const hg = gH(sc.health); const lg = gL(sc.lon);
+  const l = last(); const b = blood();
+  const bmiV = bmi(l.weight, l.height); const bN = parseFloat(bmiV);
+  const bmiCls = bN < 18.5 ? 'low' : bN < 23 ? 'ok' : bN < 27.5 ? 'warn' : 'bad';
+  const bmiLbl = bN < 18.5 ? 'ต่ำกว่าเกณฑ์' : bN < 23 ? 'ปกติ' : bN < 27.5 ? 'เกิน' : 'อ้วน';
+  const bpCls = l.bpSys < 120 && l.bpDia < 80 ? 'ok' : l.bpSys < 130 ? 'warn' : 'bad';
+  const bpLbl = bpCls === 'ok' ? 'ปกติ' : bpCls === 'warn' ? 'สูงเล็กน้อย' : 'สูง';
+  const bioAge = calcBioAge(); const ageDiff = bioAge - S.profile.age;
+  const totalCal = S.food.reduce((a, f) => a + f.cal, 0);
+  const sleepQ = ['', 'แย่', 'พอใช้', 'ดี', 'ดีมาก'];
+
+  document.getElementById('pg').innerHTML = `
+  <div class="score-row" style="margin-top:4px">
+    <div class="score-box">
+      <div class="score-num" style="color:${hg.c}">${sc.health}</div>
+      <div class="score-lbl">Health Score</div>
+      <div class="score-grade" style="color:${hg.c}">${hg.g}</div>
+      <div style="height:5px;background:#f0f0f0;border-radius:3px;margin-top:7px"><div style="width:${sc.health}%;height:100%;background:${hg.c};border-radius:3px"></div></div>
+    </div>
+    <div class="score-box">
+      <div class="score-num" style="color:${lg.c}">${sc.lon}</div>
+      <div class="score-lbl">Longevity Score</div>
+      <div class="score-grade" style="color:${lg.c}">${lg.g}</div>
+      <div style="height:5px;background:#f0f0f0;border-radius:3px;margin-top:7px"><div style="width:${sc.lon}%;height:100%;background:${lg.c};border-radius:3px"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="bio-section">
+      <svg width="68" height="68" viewBox="0 0 68 68">
+        <circle cx="34" cy="34" r="28" fill="none" stroke="#f0f0f0" stroke-width="8"/>
+        <circle cx="34" cy="34" r="28" fill="none" stroke="${ageDiff <= 0 ? C : '#A32D2D'}" stroke-width="8"
+          stroke-dasharray="${Math.round(Math.min(100,Math.max(0,(1-Math.abs(ageDiff)/20)*100))*1.759)} 175.9"
+          stroke-linecap="round" transform="rotate(-90 34 34)"/>
+        <text x="34" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="${ageDiff <= 0 ? C : '#A32D2D'}">${bioAge}</text>
+        <text x="34" y="44" text-anchor="middle" font-size="9" fill="#888">bio age</text>
+      </svg>
+      <div>
+        <div style="font-size:14px;font-weight:600">Biological Age</div>
+        <div style="font-size:12px;color:#888;margin-top:2px">อายุจริง ${S.profile.age} ปี</div>
+        <div style="margin-top:6px">${badge(ageDiff <= 0 ? 'ok' : 'bad', ageDiff <= 0 ? `น้อยกว่า ${Math.abs(ageDiff)} ปี` : `มากกว่า ${Math.abs(ageDiff)} ปี`, ageDiff <= 0 ? 'ti-trending-down' : 'ti-trending-up')}</div>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:600;color:#888;margin-bottom:8px">คะแนนรายด้าน</div>
+    ${prow('ผลเลือด', sc.bAvg, pcolor(sc.bAvg))}
+    ${prow('ความดัน', sc.bpSc, pcolor(sc.bpSc))}
+    ${prow('กิจกรรม', sc.hSc, pcolor(sc.hSc))}
+    ${prow('ก้าวเดิน', sc.stepSc, pcolor(sc.stepSc))}
+    ${prow('การนอน', sc.sleepSc, pcolor(sc.sleepSc))}
+  </div>
+
+  <div class="g2">
+    <div class="scard">
+      <div class="slabel"><i class="ti ti-weight"></i>น้ำหนัก / BMI</div>
+      <div class="sval">${fmt(l.weight)} <span class="sunit">กก.</span></div>
+      <div style="margin-top:4px">${badge(bmiCls, `BMI ${bmiV} · ${bmiLbl}`, bmiCls === 'ok' ? 'ti-circle-check' : 'ti-alert-triangle')}</div>
+    </div>
+    <div class="scard">
+      <div class="slabel"><i class="ti ti-heart"></i>ความดัน</div>
+      <div class="sval" style="font-size:16px">${l.bpSys}/${l.bpDia} <span class="sunit">mmHg</span></div>
+      <div style="margin-top:4px">${badge(bpCls, bpLbl, bpCls === 'ok' ? 'ti-circle-check' : 'ti-alert-triangle')}</div>
+    </div>
+    <div class="scard">
+      <div class="slabel"><i class="ti ti-walk"></i>ก้าวเดิน</div>
+      <div class="sval" style="font-size:17px">${(l.steps || 0).toLocaleString()}</div>
+      <div style="margin-top:4px">${badge((l.steps || 0) >= 10000 ? 'ok' : (l.steps || 0) >= 7000 ? 'warn' : 'bad', `เป้า 10,000`, (l.steps || 0) >= 10000 ? 'ti-circle-check' : 'ti-alert-triangle')}</div>
+    </div>
+    <div class="scard">
+      <div class="slabel"><i class="ti ti-moon"></i>การนอน</div>
+      <div class="sval" style="font-size:17px">${fmt(l.sleep || 0)} <span class="sunit">ชม.</span></div>
+      <div style="margin-top:4px">${badge((l.sleep || 0) >= 7 ? 'ok' : 'warn', sleepQ[l.sleepQ || 2], (l.sleep || 0) >= 7 ? 'ti-circle-check' : 'ti-alert-triangle')}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div class="card-title" style="margin-bottom:0"><i class="ti ti-salad" style="color:${C}"></i>แคลอรี่วันนี้</div>
+      <span style="font-size:14px;font-weight:700;color:${totalCal <= 2000 ? C : '#A32D2D'}">${totalCal} <span style="font-size:11px;font-weight:400;color:#888">/ 2,000</span></span>
+    </div>
+    <div style="height:9px;background:#f0f0f0;border-radius:5px;overflow:hidden">
+      <div style="width:${Math.min(100, Math.round(totalCal / 2000 * 100))}%;height:100%;background:${totalCal <= 2000 ? C : '#A32D2D'};border-radius:5px"></div>
+    </div>
+    <div style="font-size:11px;color:#888;margin-top:5px">เหลือ ${Math.max(0, 2000 - totalCal)} kcal</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><i class="ti ti-bulb" style="color:#BA7517"></i>คำแนะนำสุขภาพ</div>
+    ${genAdvice().slice(0, 3).map(a => `<div class="advice-item">
+      <i class="ti ${a.ic}" style="font-size:19px;color:${a.cls === 'ok' ? C : a.cls === 'warn' ? '#854F0B' : '#A32D2D'};flex-shrink:0;width:22px;margin-top:1px"></i>
+      <div><div style="font-size:11px;font-weight:600;color:#888;margin-bottom:2px">${a.cat}</div><div style="font-size:13px;line-height:1.4">${a.txt}</div></div>
+    </div>`).join('')}
+    <button class="btn btn-outline" style="margin-top:10px" onclick="go('more');S.moreTab='advice';renderMore()"><i class="ti ti-arrow-right"></i>ดูคำแนะนำทั้งหมด</button>
+  </div>
+  <button class="btn" onclick="go('log')"><i class="ti ti-plus"></i>บันทึกข้อมูลวันนี้</button>`;
+}
+
+function renderLog() {
+  const l = last();
+  document.getElementById('pg').innerHTML = `
+  <div class="card" style="margin-top:4px">
+    <div class="form-group"><label class="flabel">วันที่</label><input type="date" id="lDate" value="${today()}"></div>
+    <div class="sec">ข้อมูลร่างกาย</div>
+    <div class="g2">
+      <div class="form-group"><label class="flabel">น้ำหนัก (กก.)</label><input type="number" id="lW" placeholder="${l.weight}" step="0.1"></div>
+      <div class="form-group"><label class="flabel">ส่วนสูง (ซม.)</label><input type="number" id="lH" placeholder="${l.height}" step="1"></div>
+    </div>
+    <div class="form-group"><label class="flabel">รอบเอว (ซม.)</label><input type="number" id="lWst" placeholder="${l.waist}" step="0.5"></div>
+    <div class="sec">ความดันโลหิต</div>
+    <div class="g2">
+      <div class="form-group"><label class="flabel">ตัวบน SYS (mmHg)</label><input type="number" id="lSys" placeholder="${l.bpSys}" step="1"></div>
+      <div class="form-group"><label class="flabel">ตัวล่าง DIA (mmHg)</label><input type="number" id="lDia" placeholder="${l.bpDia}" step="1"></div>
+    </div>
+    <div class="sec">กิจกรรม & การนอน</div>
+    <div class="g2">
+      <div class="form-group"><label class="flabel">ก้าวเดิน</label><input type="number" id="lSteps" placeholder="${l.steps || 0}" step="100"></div>
+      <div class="form-group"><label class="flabel">ชั่วโมงนอน</label><input type="number" id="lSleep" placeholder="${l.sleep || 7}" step="0.5"></div>
+    </div>
+    <div class="form-group"><label class="flabel">คุณภาพการนอน</label>
+      <select id="lSleepQ">
+        <option value="1">1 — แย่มาก</option>
+        <option value="2">2 — พอใช้</option>
+        <option value="3" ${(l.sleepQ || 3) === 3 ? 'selected' : ''}>3 — ดี</option>
+        <option value="4" ${(l.sleepQ || 3) === 4 ? 'selected' : ''}>4 — ดีมาก</option>
+      </select>
+    </div>
+  </div>
+  <button class="btn" onclick="saveLog()"><i class="ti ti-device-floppy"></i>บันทึกข้อมูล</button>`;
+}
+
+function saveLog() {
+  const l = last();
+  S.logs.push({
+    date: document.getElementById('lDate').value,
+    weight: parseFloat(document.getElementById('lW').value) || l.weight,
+    height: parseFloat(document.getElementById('lH').value) || l.height,
+    waist: parseFloat(document.getElementById('lWst').value) || l.waist,
+    bpSys: parseFloat(document.getElementById('lSys').value) || l.bpSys,
+    bpDia: parseFloat(document.getElementById('lDia').value) || l.bpDia,
+    steps: parseFloat(document.getElementById('lSteps').value) || l.steps,
+    sleep: parseFloat(document.getElementById('lSleep').value) || l.sleep,
+    sleepQ: parseInt(document.getElementById('lSleepQ').value) || 3,
+  });
+  saveState();
+  toast('✓ บันทึกเรียบร้อย!');
+  setTimeout(() => go('dash'), 800);
+}
+
+function renderBlood() {
+  const t = S.bloodTab;
+  document.getElementById('pg').innerHTML = `
+  <div class="tab-row" style="margin-top:4px">
+    <button class="tab-btn ${t==='result'?'active':''}" onclick="switchBTab('result')">ผลล่าสุด</button>
+    <button class="tab-btn ${t==='compare'?'active':''}" onclick="switchBTab('compare')">เปรียบเทียบ</button>
+    <button class="tab-btn ${t==='input'?'active':''}" onclick="switchBTab('input')">บันทึกผล</button>
+  </div>
+  <div id="bContent"></div>`;
+  renderBTab(t);
+}
+
+function switchBTab(t) { S.bloodTab = t; renderBlood(); }
+
+function renderBTab(t) {
+  const b = blood(); const pb = prevBlood();
+  const c = document.getElementById('bContent');
+  if (t === 'result') {
+    c.innerHTML = `<div class="card">${Object.keys(bDefs).map(k => {
+      const st = bSt(k, b[k]); const d = bDefs[k];
+      const col = st.cls === 'ok' ? '#27500A' : st.cls === 'warn' ? '#633806' : st.cls === 'low' ? '#185FA5' : '#791F1F';
+      return `<div class="blood-row">
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${d.lbl}</div><div style="font-size:10px;color:#999">${d.ref}</div></div>
+        <div style="text-align:right">
+          <div style="font-size:15px;font-weight:700;color:${col}">${b[k]} <span style="font-size:10px;font-weight:400;color:#888">mg/dL</span></div>
+          ${badge(st.cls, st.lbl, st.ic)}
+        </div>
+      </div>`;
+    }).join('')}</div>`;
+  } else if (t === 'compare') {
+    if (!pb) { c.innerHTML = `<div class="card"><div class="empty"><i class="ti ti-info-circle"></i>ยังไม่มีผลเลือดครั้งก่อน</div></div>`; return; }
+    c.innerHTML = `<div class="card">
+      <div style="display:grid;grid-template-columns:1fr 56px 1fr;gap:4px;margin-bottom:8px;font-size:10px;color:#999;text-align:center;font-weight:600">
+        <div>${pb.date}</div><div></div><div>${b.date}</div>
+      </div>
+      ${Object.keys(bDefs).map(k => {
+        const diff = parseFloat((b[k] - pb[k]).toFixed(1));
+        const stNew = bSt(k, b[k]);
+        const better = k === 'hdl' ? diff > 0 : diff < 0;
+        const arrowIc = diff === 0 ? 'ti-minus' : diff < 0 ? 'ti-arrow-down' : 'ti-arrow-up';
+        const arrowCol = better ? C : '#A32D2D';
+        return `<div style="display:grid;grid-template-columns:1fr 56px 1fr;gap:4px;padding:8px 0;border-bottom:1px solid #f5f5f5;align-items:center">
+          <div class="compare-col"><div class="compare-val" style="color:#888">${pb[k]}</div><div class="compare-lbl">${bDefs[k].lbl}</div></div>
+          <div style="text-align:center">
+            <i class="ti ${arrowIc}" style="font-size:18px;color:${arrowCol}"></i>
+            <div style="font-size:10px;color:${arrowCol};font-weight:600">${diff > 0 ? '+' : ''}${diff}</div>
+          </div>
+          <div class="compare-col">
+            <div class="compare-val" style="color:${stNew.cls === 'ok' ? '#27500A' : stNew.cls === 'warn' ? '#633806' : '#791F1F'}">${b[k]}</div>
+            ${badge(stNew.cls, stNew.lbl, stNew.ic)}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  } else {
+    c.innerHTML = `<div class="card">
+      <div class="form-group"><label class="flabel">วันที่ตรวจ</label><input type="date" id="bDate" value="${today()}"></div>
+      <div class="g2">
+        <div class="form-group"><label class="flabel">Cholesterol</label><input type="number" id="bC" value="${b.chol}" step="1"></div>
+        <div class="form-group"><label class="flabel">Triglyceride</label><input type="number" id="bTg" value="${b.tg}" step="1"></div>
+      </div>
+      <div class="g2">
+        <div class="form-group"><label class="flabel">HDL</label><input type="number" id="bHdl" value="${b.hdl}" step="1"></div>
+        <div class="form-group"><label class="flabel">LDL</label><input type="number" id="bLdl" value="${b.ldl}" step="1"></div>
+      </div>
+      <div class="g2">
+        <div class="form-group"><label class="flabel">Uric Acid</label><input type="number" id="bUr" value="${b.uric}" step="0.1"></div>
+        <div class="form-group"><label class="flabel">FBS (น้ำตาล)</label><input type="number" id="bFbs" value="${b.fbs}" step="1"></div>
+      </div>
+      <div class="form-group"><label class="flabel">Creatinine</label><input type="number" id="bCr" value="${b.creatinine}" step="0.01"></div>
+    </div>
+    <button class="btn" onclick="saveBlood()"><i class="ti ti-device-floppy"></i>บันทึกผลเลือด</button>`;
+  }
+}
+
+function saveBlood() {
+  const b = blood();
+  S.bloodHistory.push({
+    date: document.getElementById('bDate').value,
+    chol: parseFloat(document.getElementById('bC').value) || b.chol,
+    tg: parseFloat(document.getElementById('bTg').value) || b.tg,
+    hdl: parseFloat(document.getElementById('bHdl').value) || b.hdl,
+    ldl: parseFloat(document.getElementById('bLdl').value) || b.ldl,
+    uric: parseFloat(document.getElementById('bUr').value) || b.uric,
+    fbs: parseFloat(document.getElementById('bFbs').value) || b.fbs,
+    creatinine: parseFloat(document.getElementById('bCr').value) || b.creatinine,
+  });
+  saveState();
+  toast('✓ บันทึกผลเลือดเรียบร้อย!');
+  S.bloodTab = 'compare';
+  setTimeout(() => renderBlood(), 700);
+}
+
+function renderFood() {
+  const total = S.food.reduce((a, f) => a + f.cal, 0);
+  const meals = [
+    { key: 'เช้า', label: 'อาหารเช้า', ic: 'ti-sun' },
+    { key: 'กลางวัน', label: 'อาหารกลางวัน', ic: 'ti-sun-high' },
+    { key: 'เย็น', label: 'อาหารเย็น', ic: 'ti-moon' },
+    { key: 'ว่าง', label: 'ของว่าง', ic: 'ti-cookie' },
+  ];
+  document.getElementById('pg').innerHTML = `
+  <div class="card" style="margin-top:4px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px">
+      <div class="card-title" style="margin-bottom:0"><i class="ti ti-salad" style="color:${C}"></i>แคลอรี่วันนี้</div>
+      <span style="font-size:18px;font-weight:700;color:${total <= 2000 ? C : '#A32D2D'}">${total} <span style="font-size:11px;font-weight:400;color:#888">kcal</span></span>
+    </div>
+    <div style="height:9px;background:#f0f0f0;border-radius:5px;overflow:hidden;margin-bottom:5px">
+      <div style="width:${Math.min(100, Math.round(total / 2000 * 100))}%;height:100%;background:${total <= 2000 ? C : '#A32D2D'};border-radius:5px"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#888">
+      <span>${Math.min(100, Math.round(total / 2000 * 100))}% ของ 2,000 kcal</span>
+      <span>เหลือ ${Math.max(0, 2000 - total)} kcal</span>
+    </div>
+  </div>
+  ${meals.map(m => {
+    const items = S.food.filter(f => f.type === m.key);
+    const mCal = items.reduce((a, f) => a + f.cal, 0);
+    return `<div class="card">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <div class="card-title" style="margin-bottom:0"><i class="ti ${m.ic}" style="color:${C}"></i>${m.label}</div>
+        <span style="font-size:13px;color:#888">${mCal} kcal</span>
+      </div>
+      ${items.map(f => `<div class="food-item">
+        <div><div style="font-size:13px;font-weight:500">${f.name}</div><div style="font-size:11px;color:#999">${f.time}</div></div>
+        <div style="font-size:13px;font-weight:700;color:${C}">${f.cal} kcal</div>
+      </div>`).join('')}
+      ${items.length === 0 ? `<div style="font-size:12px;color:#ccc;text-align:center;padding:8px">ยังไม่มีข้อมูล</div>` : ''}
+    </div>`;
+  }).join('')}
+  <div class="card">
+    <div class="card-title"><i class="ti ti-plus" style="color:${C}"></i>เพิ่มรายการอาหาร</div>
+    <div class="form-group"><label class="flabel">ชื่ออาหาร</label><input type="text" id="fName" placeholder="เช่น ข้าวกล้อง + ไก่ต้ม"></div>
+    <div class="g2">
+      <div class="form-group"><label class="flabel">แคลอรี่ (kcal)</label><input type="number" id="fCal" placeholder="300" step="10"></div>
+      <div class="form-group"><label class="flabel">เวลา</label><input type="time" id="fTime" value="12:00"></div>
+    </div>
+    <div class="form-group"><label class="flabel">มื้อ</label>
+      <select id="fType"><option>เช้า</option><option selected>กลางวัน</option><option>เย็น</option><option>ว่าง</option></select>
+    </div>
+  </div>
+  <button class="btn" onclick="addFood()"><i class="ti ti-plus"></i>เพิ่มรายการ</button>`;
+}
+
+function addFood() {
+  const n = document.getElementById('fName').value;
+  const cal = parseInt(document.getElementById('fCal').value);
+  if (!n || !cal) { toast('⚠ กรุณากรอกชื่อและแคลอรี่'); return; }
+  S.food.push({ name: n, cal, time: document.getElementById('fTime').value, type: document.getElementById('fType').value });
+  saveState(); toast('✓ เพิ่มรายการเรียบร้อย!');
+  setTimeout(() => renderFood(), 600);
+}
+
+function renderMore() {
+  const t = S.moreTab;
+  document.getElementById('pg').innerHTML = `
+  <div class="tab-row" style="margin-top:4px">
+    <button class="tab-btn ${t==='habits'?'active':''}" onclick="switchMore('habits')">กิจกรรม</button>
+    <button class="tab-btn ${t==='sleep'?'active':''}" onclick="switchMore('sleep')">นอนหลับ</button>
+    <button class="tab-btn ${t==='goals'?'active':''}" onclick="switchMore('goals')">เป้าหมาย</button>
+    <button class="tab-btn ${t==='reminder'?'active':''}" onclick="switchMore('reminder')">แจ้งเตือน</button>
+    <button class="tab-btn ${t==='advice'?'active':''}" onclick="switchMore('advice')">คำแนะนำ</button>
+    <button class="tab-btn ${t==='chart'?'active':''}" onclick="switchMore('chart')">กราฟ</button>
+    <button class="tab-btn ${t==='report'?'active':''}" onclick="switchMore('report')">รายงาน</button>
+  </div>
+  <div id="mContent"></div>`;
+  renderMoreContent(t);
+}
+
+function switchMore(t) { S.moreTab = t; renderMore(); }
+
+function renderMoreContent(t) {
+  const c = document.getElementById('mContent'); if (!c) return;
+  if (t === 'habits') renderHabits(c);
+  else if (t === 'sleep') renderSleep(c);
+  else if (t === 'goals') renderGoals(c);
+  else if (t === 'reminder') renderReminder(c);
+  else if (t === 'advice') renderAdvice(c);
+  else if (t === 'chart') renderChartPage(c);
+  else if (t === 'report') renderReport(c);
+}
+
+function renderHabits(c) {
+  const done = S.habits.filter(h => h.done).length;
+  c.innerHTML = `
+  <div class="card" style="display:flex;align-items:center;gap:14px">
+    <svg width="56" height="56" viewBox="0 0 56 56">
+      <circle cx="28" cy="28" r="24" fill="none" stroke="#f0f0f0" stroke-width="7"/>
+      <circle cx="28" cy="28" r="24" fill="none" stroke="${C}" stroke-width="7"
+        stroke-dasharray="${Math.round((done / S.habits.length) * 150.8)} 150.8"
+        stroke-linecap="round" transform="rotate(-90 28 28)"/>
+      <text x="28" y="33" text-anchor="middle" font-size="13" font-weight="700" fill="${C}">${done}/${S.habits.length}</text>
+    </svg>
+    <div>
+      <div style="font-size:15px;font-weight:600">กิจกรรมประจำวัน</div>
+      <div style="font-size:12px;color:#888;margin-top:2px">${done} จาก ${S.habits.length} รายการสำเร็จ</div>
+      <div style="margin-top:5px">${badge(done >= 6 ? 'ok' : done >= 4 ? 'warn' : 'bad', done >= 6 ? 'ดีมาก' : done >= 4 ? 'พอใช้' : 'ต้องเพิ่ม', done >= 6 ? 'ti-circle-check' : 'ti-alert-triangle')}</div>
+    </div>
+  </div>
+  <div class="card">
+    ${S.habits.map(h => `<div class="habit-item">
+      <i class="ti ${h.icon}" style="font-size:19px;color:${C};width:24px;text-align:center"></i>
+      <span style="flex:1;font-size:13px;${h.done ? 'color:#bbb;text-decoration:line-through' : ''}">${h.text}</span>
+      <button class="hcheck ${h.done ? 'checked' : ''}" onclick="toggleHabit(${h.id})">
+        ${h.done ? '<i class="ti ti-check" style="font-size:13px"></i>' : ''}
+      </button>
+    </div>`).join('')}
+  </div>`;
+}
+
+function toggleHabit(id) {
+  const h = S.habits.find(x => x.id === id); if (h) h.done = !h.done;
+  saveState(); renderHabits(document.getElementById('mContent'));
+}
+
+function renderSleep(c) {
+  const logs = S.logs.slice(-7);
+  const avg = (logs.reduce((a, l) => a + (l.sleep || 0), 0) / logs.length).toFixed(1);
+  const qLbl = ['', 'แย่', 'พอใช้', 'ดี', 'ดีมาก'];
+  const lastL = S.logs[S.logs.length - 1];
+  c.innerHTML = `
+  <div class="g2">
+    <div class="scard"><div class="slabel">เฉลี่ย 7 วัน</div><div class="sval">${avg} <span class="sunit">ชม.</span></div><div style="margin-top:4px">${badge(parseFloat(avg) >= 7 ? 'ok' : 'warn', parseFloat(avg) >= 7 ? 'เพียงพอ' : 'น้อยไป', parseFloat(avg) >= 7 ? 'ti-circle-check' : 'ti-alert-triangle')}</div></div>
+    <div class="scard"><div class="slabel">คุณภาพล่าสุด</div><div class="sval" style="font-size:17px">${qLbl[lastL.sleepQ || 2]}</div><div style="margin-top:4px">${badge(lastL.sleepQ >= 3 ? 'ok' : 'warn', `${lastL.sleepQ || 2}/4`, lastL.sleepQ >= 3 ? 'ti-circle-check' : 'ti-alert-triangle')}</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-chart-bar" style="color:${C}"></i>ประวัติการนอน</div>
+    ${logs.map(l => `<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+      <span style="font-size:11px;color:#888;width:48px;flex-shrink:0">${l.date.slice(5)}</span>
+      <div style="flex:1;height:7px;background:#f0f0f0;border-radius:4px;overflow:hidden">
+        <div style="width:${Math.min(100, Math.round((l.sleep || 0) / 9 * 100))}%;height:100%;background:${(l.sleep || 0) >= 7 ? C : '#854F0B'};border-radius:4px"></div>
+      </div>
+      <span style="font-size:11px;font-weight:600;color:${(l.sleep || 0) >= 7 ? C : '#854F0B'};width:36px;text-align:right">${l.sleep || 0} ชม.</span>
+    </div>`).join('')}
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-bulb" style="color:#BA7517"></i>เคล็ดลับการนอน</div>
+    ${[
+      { ic: 'ti-clock', t: 'เข้านอนให้ตรงเวลาทุกวัน แม้วันหยุด ร่างกายจะเรียนรู้จังหวะเอง' },
+      { ic: 'ti-device-mobile-off', t: 'วางโทรศัพท์ 30 นาทีก่อนนอน แสงสีฟ้ากระตุ้นสมองทำให้นอนหลับยาก' },
+      { ic: 'ti-temperature', t: 'ห้องนอนควรเย็น 22–24°C ช่วยให้หลับลึกและฝันดี' },
+    ].map(i => `<div class="advice-item"><i class="ti ${i.ic}" style="font-size:18px;color:${C};width:22px;flex-shrink:0"></i><div style="font-size:13px;line-height:1.4">${i.t}</div></div>`).join('')}
+  </div>`;
+}
+
+function renderGoals(c) {
+  const l = last(); const b = blood();
+  const goals = [
+    { lbl: 'น้ำหนัก', cur: l.weight, goal: S.goals.weight, unit: 'กก.', better: 'lower' },
+    { lbl: 'ความดัน SYS', cur: l.bpSys, goal: S.goals.bpSys, unit: 'mmHg', better: 'lower' },
+    { lbl: 'ความดัน DIA', cur: l.bpDia, goal: S.goals.bpDia, unit: 'mmHg', better: 'lower' },
+    { lbl: 'Cholesterol', cur: b.chol, goal: S.goals.chol, unit: 'mg/dL', better: 'lower' },
+    { lbl: 'LDL', cur: b.ldl, goal: S.goals.ldl, unit: 'mg/dL', better: 'lower' },
+    { lbl: 'ก้าวเดิน/วัน', cur: l.steps || 0, goal: S.goals.steps, unit: 'ก้าว', better: 'higher' },
+  ];
+  c.innerHTML = `<div class="card">
+    <div class="card-title"><i class="ti ti-target" style="color:${C}"></i>เป้าหมายสุขภาพ</div>
+    ${goals.map(g => {
+      const diff = g.better === 'lower' ? g.cur - g.goal : g.goal - g.cur;
+      const reached = diff <= 0;
+      const pct = g.better === 'higher' ? Math.min(100, Math.round((g.cur / g.goal) * 100)) : Math.max(0, Math.min(100, Math.round((1 - Math.max(0, diff) / (g.goal * 0.4)) * 100)));
+      return `<div class="goal-row">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600">${g.lbl}</div>
+          <div style="font-size:11px;color:#999">ปัจจุบัน ${g.cur.toLocaleString()} → เป้า ${g.goal.toLocaleString()} ${g.unit}</div>
+          <div style="height:5px;background:#f0f0f0;border-radius:3px;overflow:hidden;margin-top:5px">
+            <div style="width:${pct}%;height:100%;background:${reached ? C : '#854F0B'};border-radius:3px"></div>
+          </div>
+        </div>
+        <div style="margin-left:10px;flex-shrink:0">${badge(reached ? 'ok' : 'warn', reached ? 'สำเร็จ' : `ต่าง ${Math.abs(diff).toFixed(0)}`, reached ? 'ti-circle-check' : 'ti-target')}</div>
+      </div>`;
+    }).join('')}
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-edit" style="color:${C}"></i>แก้ไขเป้าหมาย</div>
+    <div class="g2">
+      <div class="form-group"><label class="flabel">น้ำหนักเป้า (กก.)</label><input type="number" id="gW" value="${S.goals.weight}" step="0.5"></div>
+      <div class="form-group"><label class="flabel">ก้าวเดิน/วัน</label><input type="number" id="gSt" value="${S.goals.steps}" step="500"></div>
+    </div>
+    <div class="g2">
+      <div class="form-group"><label class="flabel">ความดัน SYS</label><input type="number" id="gSys" value="${S.goals.bpSys}" step="1"></div>
+      <div class="form-group"><label class="flabel">Cholesterol</label><input type="number" id="gChol" value="${S.goals.chol}" step="5"></div>
+    </div>
+  </div>
+  <button class="btn" onclick="saveGoals()"><i class="ti ti-device-floppy"></i>บันทึกเป้าหมาย</button>`;
+}
+
+function saveGoals() {
+  S.goals.weight = parseFloat(document.getElementById('gW').value) || S.goals.weight;
+  S.goals.steps = parseFloat(document.getElementById('gSt').value) || S.goals.steps;
+  S.goals.bpSys = parseFloat(document.getElementById('gSys').value) || S.goals.bpSys;
+  S.goals.chol = parseFloat(document.getElementById('gChol').value) || S.goals.chol;
+  saveState(); toast('✓ บันทึกเป้าหมายเรียบร้อย!');
+  setTimeout(() => renderGoals(document.getElementById('mContent')), 600);
+}
+
+function renderReminder(c) {
+  c.innerHTML = `<div class="card">
+    <div class="card-title"><i class="ti ti-bell" style="color:${C}"></i>การแจ้งเตือน</div>
+    ${S.reminders.map(r => `<div class="rem-item">
+      <i class="ti ${r.icon}" style="font-size:20px;color:${r.on ? C : '#ccc'};width:24px"></i>
+      <div style="flex:1"><div style="font-size:13px;font-weight:500">${r.text}</div><div style="font-size:11px;color:#999">${r.time} น.</div></div>
+      <button class="tog ${r.on ? 'on' : 'off'}" onclick="toggleRem(${r.id})"></button>
+    </div>`).join('')}
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-plus" style="color:${C}"></i>เพิ่มการแจ้งเตือน</div>
+    <div class="form-group"><label class="flabel">ข้อความ</label><input type="text" id="rTxt" placeholder="เช่น กินยาเย็น"></div>
+    <div class="g2">
+      <div class="form-group"><label class="flabel">เวลา</label><input type="time" id="rTime" value="12:00"></div>
+      <div class="form-group"><label class="flabel">ไอคอน</label>
+        <select id="rIco"><option value="ti-pill">ยา</option><option value="ti-droplet">น้ำ</option><option value="ti-heart">ความดัน</option><option value="ti-run">ออกกำลังกาย</option><option value="ti-moon">นอน</option></select>
+      </div>
+    </div>
+  </div>
+  <button class="btn" onclick="addReminder()"><i class="ti ti-plus"></i>เพิ่มการแจ้งเตือน</button>`;
+}
+
+function toggleRem(id) {
+  const r = S.reminders.find(x => x.id === id); if (r) r.on = !r.on;
+  saveState(); renderReminder(document.getElementById('mContent'));
+}
+
+function addReminder() {
+  const t = document.getElementById('rTxt').value; if (!t) { toast('⚠ กรุณากรอกข้อความ'); return; }
+  S.reminders.push({ id: Date.now(), icon: document.getElementById('rIco').value, text: t, time: document.getElementById('rTime').value, on: true });
+  saveState(); toast('✓ เพิ่มการแจ้งเตือนเรียบร้อย!');
+  setTimeout(() => renderReminder(document.getElementById('mContent')), 600);
+}
+
+function renderAdvice(c) {
+  const advice = genAdvice();
+  c.innerHTML = `<div class="card">
+    <div class="card-title"><i class="ti ti-bulb" style="color:#BA7517"></i>คำแนะนำตามค่าเลือดจริง</div>
+    ${advice.map(a => `<div class="advice-item">
+      <i class="ti ${a.ic}" style="font-size:20px;color:${a.cls === 'ok' ? C : a.cls === 'warn' ? '#854F0B' : '#A32D2D'};flex-shrink:0;width:24px;margin-top:1px"></i>
+      <div><div style="font-size:11px;font-weight:600;color:#888;margin-bottom:2px">${a.cat}</div><div style="font-size:13px;line-height:1.4">${a.txt}</div></div>
+    </div>`).join('')}
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-dumbbell" style="color:${C}"></i>แผนออกกำลังกายแนะนำ</div>
+    ${[
+      { day: 'จันทร์ / พุธ / ศุกร์', act: 'Cardio 30–45 นาที — เดิน วิ่งเบา ว่ายน้ำ ปั่นจักรยาน', ic: 'ti-run' },
+      { day: 'อังคาร / พฤหัสบดี', act: 'Resistance Training — ยกน้ำหนักเบา หรือ Yoga', ic: 'ti-barbell' },
+      { day: 'เสาร์', act: 'กิจกรรมกลางแจ้ง — เดินสวน ปีนเขา 45–60 นาที', ic: 'ti-mountain' },
+      { day: 'อาทิตย์', act: 'พักฟื้น — ยืดเหยียด Stretch หรือ Meditation', ic: 'ti-yoga' },
+    ].map(p => `<div class="advice-item">
+      <i class="ti ${p.ic}" style="font-size:18px;color:${C};width:22px;flex-shrink:0"></i>
+      <div><div style="font-size:11px;font-weight:600;color:#888">${p.day}</div><div style="font-size:13px;line-height:1.4">${p.act}</div></div>
+    </div>`).join('')}
+  </div>`;
+}
+
+function renderChartPage(c) {
+  const t = S.chartTab;
+  c.innerHTML = `
+  <div class="tab-row">
+    <button class="tab-btn ${t==='weight'?'active':''}" onclick="switchChart('weight')">น้ำหนัก</button>
+    <button class="tab-btn ${t==='bp'?'active':''}" onclick="switchChart('bp')">ความดัน</button>
+    <button class="tab-btn ${t==='steps'?'active':''}" onclick="switchChart('steps')">ก้าวเดิน</button>
+    <button class="tab-btn ${t==='sleep'?'active':''}" onclick="switchChart('sleep')">การนอน</button>
+  </div>
+  <div class="card" style="padding:10px"><div class="chart-wrap"><canvas id="tChart" role="img" aria-label="กราฟแนวโน้มสุขภาพ"></canvas></div></div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-table" style="color:${C}"></i>ตารางข้อมูล</div>
+    <div style="overflow-x:auto"><table style="width:100%;font-size:12px;border-collapse:collapse;table-layout:fixed">
+      <thead><tr style="color:#888;border-bottom:1px solid #f0f0f0">
+        <th style="padding:5px 0;text-align:left;font-weight:600;width:80px">วันที่</th>
+        <th style="padding:5px 4px;text-align:right;font-weight:600">น้ำหนัก</th>
+        <th style="padding:5px 4px;text-align:right;font-weight:600">BMI</th>
+        <th style="padding:5px 4px;text-align:right;font-weight:600">ความดัน</th>
+        <th style="padding:5px 4px;text-align:right;font-weight:600">ก้าว</th>
+      </tr></thead>
+      <tbody>${S.logs.map(l => `<tr style="border-bottom:1px solid #f8f8f8">
+        <td style="padding:6px 0">${l.date.slice(5)}</td>
+        <td style="padding:6px 4px;text-align:right">${fmt(l.weight)}</td>
+        <td style="padding:6px 4px;text-align:right">${bmi(l.weight, l.height)}</td>
+        <td style="padding:6px 4px;text-align:right">${l.bpSys}/${l.bpDia}</td>
+        <td style="padding:6px 4px;text-align:right">${(l.steps || 0).toLocaleString()}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+  setTimeout(() => drawChart(t), 80);
+}
+
+function switchChart(t) { S.chartTab = t; renderChartPage(document.getElementById('mContent')); }
+
+function drawChart(tab) {
+  const canvas = document.getElementById('tChart'); if (!canvas) return;
+  if (activeChart) { activeChart.destroy(); activeChart = null; }
+  const labels = S.logs.map(l => l.date.slice(5));
+  let datasets = [];
+  if (tab === 'weight') datasets = [{ label: 'น้ำหนัก (กก.)', data: S.logs.map(l => l.weight), borderColor: '#1a6b3c', backgroundColor: 'rgba(26,107,60,0.1)', tension: 0.3, fill: true, pointRadius: 4, pointBackgroundColor: '#1a6b3c' }];
+  else if (tab === 'bp') datasets = [
+    { label: 'SYS', data: S.logs.map(l => l.bpSys), borderColor: '#A32D2D', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#A32D2D' },
+    { label: 'DIA', data: S.logs.map(l => l.bpDia), borderColor: '#185FA5', tension: 0.3, borderDash: [5, 4], pointRadius: 4, pointBackgroundColor: '#185FA5' },
+  ];
+  else if (tab === 'steps') datasets = [{ label: 'ก้าวเดิน', data: S.logs.map(l => l.steps || 0), borderColor: '#185FA5', backgroundColor: 'rgba(24,95,165,0.1)', tension: 0.3, fill: true, pointRadius: 4, pointBackgroundColor: '#185FA5' }];
+  else datasets = [{ label: 'ชั่วโมงนอน', data: S.logs.map(l => l.sleep || 0), borderColor: '#534AB7', backgroundColor: 'rgba(83,74,183,0.1)', tension: 0.3, fill: true, pointRadius: 4, pointBackgroundColor: '#534AB7' }];
+  activeChart = new Chart(canvas, { type: 'line', data: { labels, datasets }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: tab === 'bp', labels: { font: { size: 11 }, boxWidth: 10 } } }, scales: { x: { ticks: { font: { size: 11 } } }, y: { ticks: { font: { size: 11 } } } } } });
+}
+
+function renderReport(c) {
+  const l = last(); const b = blood(); const sc = calcScores(); const bioAge = calcBioAge();
+  const now = new Date(); const mo = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const stepAvg = Math.round(S.logs.reduce((a, x) => a + (x.steps || 0), 0) / S.logs.length);
+  const sleepAvg = (S.logs.reduce((a, x) => a + (x.sleep || 0), 0) / S.logs.length).toFixed(1);
+  const warns = genAdvice().filter(a => a.cls !== 'ok');
+
+  c.innerHTML = `<div class="card">
+    <div class="card-title"><i class="ti ti-file-description" style="color:${C}"></i>รายงานสรุปสุขภาพ</div>
+    <div style="font-size:12px;color:#888;margin-bottom:10px">${now.getDate()} ${mo[now.getMonth()]} ${now.getFullYear() + 543} — สำหรับนำให้แพทย์</div>
+    <div style="background:#f8fbf8;border-radius:var(--radius-sm);padding:12px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:600;color:${C};margin-bottom:8px">${S.profile.name} | อายุ ${S.profile.age} ปี | Biological Age ${bioAge} ปี</div>
+      <table class="report-table" style="width:100%">
+        <tr><td style="color:#666">น้ำหนัก / BMI</td><td>${fmt(l.weight)} กก. / ${bmi(l.weight, l.height)}</td></tr>
+        <tr><td style="color:#666">รอบเอว</td><td>${l.waist} ซม.</td></tr>
+        <tr><td style="color:#666">ความดันโลหิต</td><td>${l.bpSys}/${l.bpDia} mmHg</td></tr>
+        <tr><td style="color:#666">Cholesterol / LDL</td><td>${b.chol} / ${b.ldl} mg/dL</td></tr>
+        <tr><td style="color:#666">HDL / Triglyceride</td><td>${b.hdl} / ${b.tg} mg/dL</td></tr>
+        <tr><td style="color:#666">Uric Acid / FBS</td><td>${b.uric} / ${b.fbs} mg/dL</td></tr>
+        <tr><td style="color:#666">Creatinine</td><td>${b.creatinine} mg/dL</td></tr>
+        <tr><td style="color:#666">ก้าวเดินเฉลี่ย</td><td>${stepAvg.toLocaleString()} ก้าว/วัน</td></tr>
+        <tr><td style="color:#666">การนอนเฉลี่ย</td><td>${sleepAvg} ชม./คืน</td></tr>
+        <tr><td style="color:#666">Health Score</td><td>${sc.health}/100 — ${gH(sc.health).g}</td></tr>
+        <tr><td style="color:#666">Longevity Score</td><td>${sc.lon}/100 — ${gL(sc.lon).g}</td></tr>
+      </table>
+    </div>
+    ${warns.length > 0 ? `<div style="font-size:12px;font-weight:600;color:#A32D2D;margin-bottom:8px">ประเด็นที่ควรปรึกษาแพทย์:</div>
+    ${warns.map(a => `<div style="display:flex;gap:7px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #f5f5f5">
+      <i class="ti ti-alert-triangle" style="font-size:15px;color:#854F0B;flex-shrink:0;margin-top:1px"></i>
+      <div style="font-size:12px;line-height:1.4">${a.txt}</div>
+    </div>`).join('')}` : `<div style="text-align:center;color:${C};font-size:13px;padding:8px"><i class="ti ti-circle-check" style="font-size:20px;display:block;margin-bottom:4px"></i>ค่าสุขภาพทุกด้านอยู่ในเกณฑ์ดี</div>`}
+  </div>
+  <button class="btn" onclick="window.print()"><i class="ti ti-printer"></i>พิมพ์รายงาน</button>`;
+}
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function go(p) {
+  S.page = p;
+  ['dash','log','blood','food','more'].forEach(id => {
+    document.getElementById('nb-' + id).classList.toggle('active', id === p);
+  });
+  if (activeChart) { activeChart.destroy(); activeChart = null; }
+  if (p === 'dash') renderDash();
+  else if (p === 'log') renderLog();
+  else if (p === 'blood') renderBlood();
+  else if (p === 'food') renderFood();
+  else renderMore();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+const d = new Date();
+const thDays = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+const thMo = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+document.getElementById('hdrDate').textContent = `วัน${thDays[d.getDay()]}ที่ ${d.getDate()} ${thMo[d.getMonth()]} ${d.getFullYear() + 543}`;
+go('dash');
+
+// Service Worker registration
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
