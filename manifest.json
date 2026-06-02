@@ -2,7 +2,8 @@
   "name": "Health & Longevity Tracker",
   "short_name": "Health Tracker",
   "description": "บันทึกสุขภาพส่วนตัว — น้ำหนัก ความดัน ผลเลือด กิจกรรม",
-  "start_url": "/index.html",
+  "start_url": "/health-tracker/index.html",
+  "scope": "/health-tracker/",
   "display": "standalone",
   "background_color": "#f0f2f0",
   "theme_color": "#1a6b3c",
@@ -21,6 +22,5 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ],
-  "categories": ["health", "fitness", "medical"]
+  ]
 }
