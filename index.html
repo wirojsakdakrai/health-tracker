@@ -25,10 +25,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nb{flex:1;padding:9px 2px 7px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;color:#888;font-size:9px;font-family:inherit;transition:color .15s}
 .nb.active{color:var(--g)}
 .nb i{font-size:19px}
-.pg{flex:1;padding:10px;overflow-y:auto}
+.pg{flex:1;padding:10px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .card{background:white;border-radius:12px;border:1px solid #e8ede8;padding:13px;margin-bottom:9px}
 .ctitle{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px;color:#1a1a1a}
 .g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px}
 .sc{background:#f5f7f5;border-radius:8px;padding:10px 11px}
 .slbl{font-size:11px;color:#666;margin-bottom:3px;display:flex;align-items:center;gap:4px}
 .sval{font-size:19px;font-weight:600;color:#1a1a1a}
@@ -36,11 +37,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sec{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.6px;margin:13px 0 7px}
 .fg{margin-bottom:11px}
 .flbl{font-size:12px;color:#555;margin-bottom:5px;display:block;font-weight:500}
-input[type=number],input[type=date],input[type=text],input[type=time],input[type=email],select,textarea{width:100%;padding:9px 11px;border:1px solid #ddd;border-radius:8px;background:white;color:#1a1a1a;font-size:13px;font-family:inherit;-webkit-appearance:none}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(26,107,60,.1)}
+input[type=number],input[type=date],input[type=text],input[type=time],input[type=tel],select,textarea{width:100%;padding:9px 11px;border:1px solid #ddd;border-radius:8px;background:white;color:#1a1a1a;font-size:13px;font-family:inherit;-webkit-appearance:none}
+input:focus,select:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(26,107,60,.1)}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:34px}
 .btn{width:100%;padding:12px;background:var(--g);color:white;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:6px;font-family:inherit;transition:opacity .15s}
-.btn:active{opacity:.85;transform:scale(.99)}
+.btn:active{opacity:.85}
 .btn-o{background:white;border:1.5px solid var(--g);color:var(--g)}
 .btn-r{background:white;border:1.5px solid var(--rd);color:var(--rd)}
 .badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600}
@@ -55,9 +56,10 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .tab{padding:7px 13px;border-radius:20px;border:1px solid #ddd;background:white;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;color:#666;font-family:inherit;transition:all .15s}
 .tab.active{background:var(--g);color:white;border-color:var(--g)}
 .cw{position:relative;height:200px;margin:6px 0}
-.hi{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f5f5f5}
+.cw-sm{position:relative;height:160px;margin:6px 0}
+.hi{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f5f5f5}
 .hi:last-child{border-bottom:none}
-.hck{width:24px;height:24px;border-radius:50%;border:2px solid #ddd;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.hck{width:26px;height:26px;border-radius:50%;border:2px solid #ddd;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
 .hck.on{background:var(--g);border-color:var(--g);color:white}
 .ri{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f5f5f5}
 .ri:last-child{border-bottom:none}
@@ -65,15 +67,13 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .tog.on{background:var(--g)}.tog.off{background:#ccc}
 .tog::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;background:white;transition:left .2s}
 .tog.on::after{left:21px}.tog.off::after{left:3px}
-.cv{font-size:15px;font-weight:600;text-align:center}
-.cl{font-size:10px;color:#999;text-align:center;margin-top:2px}
+.fi{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f5f5f5}
+.fi:last-child{border-bottom:none}
 .gr{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f5f5f5}
 .gr:last-child{border-bottom:none}
 .ai{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid #f5f5f5}
 .ai:last-child{border-bottom:none}
-.fi{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f5f5f5}
-.fi:last-child{border-bottom:none}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);color:white;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;display:none;white-space:nowrap}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);color:white;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;display:none;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.15)}
 .toast.ok-t{background:var(--g)}.toast.err-t{background:var(--rd)}
 .ring-wrap{display:flex;justify-content:space-around;padding:4px 0 10px}
 .ring-item{display:flex;flex-direction:column;align-items:center;gap:5px}
@@ -90,23 +90,32 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .score-grade{font-size:12px;font-weight:600;margin-top:3px}
 .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:7px;font-size:11px;color:#888}
 .ld{width:10px;height:10px;border-radius:2px;flex-shrink:0;display:inline-block}
-/* Profile avatar */
-.avatar{width:72px;height:72px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:white;flex-shrink:0;margin:0 auto 10px}
-/* Storage info */
+.avatar{width:68px;height:68px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:white;flex-shrink:0;margin:0 auto 10px}
 .storage-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5}
 .storage-row:last-child{border-bottom:none}
 .storage-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
-/* Modal overlay */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:flex-end}
-.modal{background:white;border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:430px;margin:0 auto;max-height:80vh;overflow-y:auto}
+.modal{background:white;border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:430px;margin:0 auto;max-height:85vh;overflow-y:auto}
 .modal-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
-.empty{text-align:center;padding:24px;color:#999}
-.empty i{font-size:28px;display:block;margin-bottom:8px}
-/* data size bar */
 .ds-bar{height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden;margin:6px 0}
 .ds-fill{height:100%;border-radius:4px;background:var(--g)}
-/* profile card */
-.profile-card{background:white;border-radius:12px;border:1px solid #e8ede8;padding:18px;margin-bottom:9px;text-align:center}
+/* Date nav */
+.date-nav{display:flex;align-items:center;justify-content:space-between;background:#f5f7f5;border-radius:10px;padding:8px 12px;margin-bottom:10px}
+.date-nav-btn{background:none;border:none;cursor:pointer;font-size:20px;color:var(--g);padding:0 4px;line-height:1}
+.date-nav-label{font-size:13px;font-weight:600;color:#1a1a1a}
+/* Habit heat map */
+.heat-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px}
+.heat-cell{aspect-ratio:1;border-radius:3px;cursor:default}
+/* day strip */
+.day-strip{display:flex;gap:4px;overflow-x:auto;padding:4px 0;scrollbar-width:none}
+.day-strip::-webkit-scrollbar{display:none}
+.day-pill{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 8px;border-radius:10px;cursor:pointer;border:1px solid #eee;background:white;min-width:44px}
+.day-pill.active{background:var(--g);border-color:var(--g)}
+.day-pill.active .dp-d{color:white}
+.day-pill.active .dp-n{color:white}
+.dp-d{font-size:10px;color:#888}
+.dp-n{font-size:14px;font-weight:700;color:#1a1a1a}
+.dp-dot{width:6px;height:6px;border-radius:50%}
 </style>
 </head>
 <body>
@@ -130,58 +139,92 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <div class="toast ok-t" id="toast"></div>
 
 <script>
-const SK='hlt_v3';
-function defState(){return{
-  profile:{name:'',age:'',gender:'',height:173,bloodType:'',congenital:'',medications:'',doctor:'',hospital:'',emergency:''},
-  logs:[
-    {date:'2025-03-01',weight:80,height:173,waist:93,bpSys:143,bpDia:93,steps:5200,sleep:6.5,sleepQ:2},
-    {date:'2025-04-01',weight:78,height:173,waist:91,bpSys:138,bpDia:88,steps:6800,sleep:7,sleepQ:3},
-    {date:'2025-05-01',weight:76,height:173,waist:89,bpSys:132,bpDia:84,steps:7500,sleep:7.5,sleepQ:3},
-    {date:'2025-06-01',weight:74.5,height:173,waist:87,bpSys:128,bpDia:80,steps:8200,sleep:7.5,sleepQ:4},
-  ],
-  bloodHistory:[
-    {date:'2025-01-10',chol:228,tg:175,hdl:44,ldl:148,uric:7.1,fbs:104,creatinine:1.0},
-    {date:'2025-05-15',chol:215,tg:160,hdl:48,ldl:135,uric:6.8,fbs:98,creatinine:1.0},
-  ],
-  food:[
-    {name:'ข้าวกล้อง + ไก่ต้ม',cal:380,time:'08:00',type:'เช้า'},
-    {name:'ผัดผักรวม + ปลา',cal:320,time:'12:30',type:'กลางวัน'},
-    {name:'สลัดผัก + ไข่',cal:220,time:'18:00',type:'เย็น'},
-    {name:'กล้วย 1 ผล',cal:90,time:'10:00',type:'ว่าง'},
-  ],
-  reminders:[
-    {id:1,icon:'ti-droplet',text:'ดื่มน้ำ 8 แก้ว',time:'09:00',on:true},
-    {id:2,icon:'ti-pill',text:'กินยาเช้า',time:'08:00',on:true},
-    {id:3,icon:'ti-heart',text:'วัดความดัน',time:'07:30',on:false},
-    {id:4,icon:'ti-moon',text:'เตรียมนอน',time:'22:00',on:true},
-  ],
-  goals:{weight:70,bpSys:120,bpDia:80,chol:180,ldl:100,steps:10000,startWeight:80},
-  habits:[
-    {id:1,icon:'ti-droplet',text:'ดื่มน้ำ',fullText:'ดื่มน้ำ 8 แก้ว',done:true},
-    {id:2,icon:'ti-run',text:'ออกกำลัง',fullText:'ออกกำลังกาย ≥30 นาที',done:true},
-    {id:3,icon:'ti-walk',text:'เดิน',fullText:'เดินหลังอาหารเย็น',done:true},
-    {id:4,icon:'ti-leaf',text:'ผัก',fullText:'ทานผัก 2 กำมือ',done:true},
-    {id:5,icon:'ti-ban',text:'งดหวาน',fullText:'งดน้ำหวาน',done:false},
-    {id:6,icon:'ti-moon',text:'นอน 7ชม.',fullText:'นอนหลับ ≥7 ชั่วโมง',done:false},
-  ],
-  moreTab:'progress',chartTab:'weight',bloodTab:'result',page:'dash',
-  firstRun:true,
-};}
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+const SK='hlt_v4';
+const TODAY=new Date().toISOString().slice(0,10);
+
+function defState(){
+  return{
+    profile:{name:'',age:'',gender:'',height:173,bloodType:'',congenital:'',medications:'',doctor:'',hospital:'',emergency:'',firstRun:true},
+    // health logs (weight/bp/waist each entry)
+    logs:[
+      {date:'2025-03-01',weight:80,height:173,waist:93,bpSys:143,bpDia:93},
+      {date:'2025-04-01',weight:78,height:173,waist:91,bpSys:138,bpDia:88},
+      {date:'2025-05-01',weight:76,height:173,waist:89,bpSys:132,bpDia:84},
+      {date:'2025-06-01',weight:74.5,height:173,waist:87,bpSys:128,bpDia:80},
+    ],
+    // daily activity logs: steps + sleep stored per day
+    activityLogs:[
+      {date:'2025-03-01',steps:5200,sleep:6.5,sleepQ:2},
+      {date:'2025-04-01',steps:6800,sleep:7,sleepQ:3},
+      {date:'2025-05-01',steps:7500,sleep:7.5,sleepQ:3},
+      {date:'2025-06-01',steps:8200,sleep:7.5,sleepQ:4},
+    ],
+    // blood results history
+    bloodHistory:[
+      {date:'2025-01-10',chol:228,tg:175,hdl:44,ldl:148,uric:7.1,fbs:104,creatinine:1.0},
+      {date:'2025-05-15',chol:215,tg:160,hdl:48,ldl:135,uric:6.8,fbs:98,creatinine:1.0},
+    ],
+    // food logs per day: { 'YYYY-MM-DD': [{name,cal,time,type},...] }
+    foodLogs:{
+      '2025-06-01':[
+        {id:1,name:'ข้าวกล้อง + ไก่ต้ม',cal:380,time:'08:00',type:'เช้า'},
+        {id:2,name:'ผัดผักรวม + ปลา',cal:320,time:'12:30',type:'กลางวัน'},
+        {id:3,name:'สลัดผัก + ไข่',cal:220,time:'18:00',type:'เย็น'},
+        {id:4,name:'กล้วย 1 ผล',cal:90,time:'10:00',type:'ว่าง'},
+      ]
+    },
+    // habit templates
+    habitDefs:[
+      {id:1,icon:'ti-droplet',text:'ดื่มน้ำ',fullText:'ดื่มน้ำ 8 แก้ว'},
+      {id:2,icon:'ti-run',text:'ออกกำลัง',fullText:'ออกกำลังกาย ≥30 นาที'},
+      {id:3,icon:'ti-walk',text:'เดิน',fullText:'เดินหลังอาหารเย็น'},
+      {id:4,icon:'ti-leaf',text:'ผัก',fullText:'ทานผัก 2 กำมือ'},
+      {id:5,icon:'ti-ban',text:'งดหวาน',fullText:'งดน้ำหวาน'},
+      {id:6,icon:'ti-moon',text:'นอน 7ชม.',fullText:'นอนหลับ ≥7 ชั่วโมง'},
+    ],
+    // habit logs per day: { 'YYYY-MM-DD': {1:true, 2:false, ...} }
+    habitLogs:{
+      '2025-06-01':{1:true,2:true,3:true,4:true,5:false,6:false},
+    },
+    goals:{weight:70,bpSys:120,bpDia:80,chol:180,ldl:100,steps:10000,startWeight:80,calGoal:2000},
+    reminders:[
+      {id:1,icon:'ti-droplet',text:'ดื่มน้ำ 8 แก้ว',time:'09:00',on:true},
+      {id:2,icon:'ti-pill',text:'กินยาเช้า',time:'08:00',on:true},
+      {id:3,icon:'ti-heart',text:'วัดความดัน',time:'07:30',on:false},
+      {id:4,icon:'ti-moon',text:'เตรียมนอน',time:'22:00',on:true},
+    ],
+    // current page state
+    page:'dash',
+    bloodTab:'result',
+    moreTab:'progress',
+    chartTab:'weight',
+    foodDate:TODAY,
+    habitDate:TODAY,
+    actDate:TODAY,
+  };
+}
 
 function load(){try{const r=localStorage.getItem(SK);if(r)return JSON.parse(r);}catch(e){}return defState();}
 function save(){try{localStorage.setItem(SK,JSON.stringify(S));}catch(e){}}
 let S=load();
 let activeChart=null;
 
+// ══════════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════════
 const G='#1a6b3c';
 const fmt=(n,d=1)=>Number(n).toFixed(d);
 const bmi=(w,h)=>(w/((h/100)**2)).toFixed(1);
-const last=()=>S.logs[S.logs.length-1];
+const lastLog=()=>S.logs[S.logs.length-1];
 const blood=()=>S.bloodHistory[S.bloodHistory.length-1];
 const prevBlood=()=>S.bloodHistory.length>1?S.bloodHistory[S.bloodHistory.length-2]:null;
 const today=()=>new Date().toISOString().slice(0,10);
 const pc=v=>v>=80?G:v>=60?'#854F0B':'#A32D2D';
-function initials(name){if(!name)return'?';const p=name.trim().split(' ');return p.length>=2?(p[0][0]+p[1][0]).toUpperCase():name.slice(0,2).toUpperCase();}
+
+function initials(n){if(!n)return'?';const p=n.trim().split(' ');return(p.length>=2?p[0][0]+p[1][0]:n.slice(0,2)).toUpperCase();}
 
 function toast(m,err=false){
   const e=document.getElementById('toast');
@@ -191,12 +234,57 @@ function toast(m,err=false){
 function bdg(cls,lbl,ic){return`<span class="badge ${cls}"><i class="ti ${ic}" style="font-size:11px"></i>${lbl}</span>`;}
 function pr(lbl,pct,c,w='56px'){return`<div class="prow"><span style="font-size:11px;color:#666;width:${w};flex-shrink:0">${lbl}</span><div class="pbar"><div class="pfill" style="width:${pct}%;background:${c}"></div></div><span style="font-size:11px;font-weight:600;color:${c};width:32px;text-align:right">${pct}%</span></div>`;}
 
-function updateHeader(){
-  const n=S.profile.name;
-  document.getElementById('hdrName').textContent=n?`สวัสดี ${n}`:'Health & Longevity';
+// ── Activity helpers ───────────────────────────────────────────
+function getActivity(date){
+  return S.activityLogs.find(a=>a.date===date)||{date,steps:0,sleep:0,sleepQ:2};
+}
+function setActivity(date,data){
+  const idx=S.activityLogs.findIndex(a=>a.date===date);
+  if(idx>=0)Object.assign(S.activityLogs[idx],data);
+  else S.activityLogs.push({date,...data});
+  save();
 }
 
-// ── Blood status ──────────────────────────────────────────────────────────
+// ── Food helpers ───────────────────────────────────────────────
+function getFoodForDate(date){return S.foodLogs[date]||[];}
+function addFoodEntry(date,entry){
+  if(!S.foodLogs[date])S.foodLogs[date]=[];
+  entry.id=Date.now();
+  S.foodLogs[date].push(entry);
+  save();
+}
+function delFoodEntry(date,id){
+  if(S.foodLogs[date])S.foodLogs[date]=S.foodLogs[date].filter(f=>f.id!==id);
+  save();
+}
+
+// ── Habit helpers ──────────────────────────────────────────────
+function getHabits(date){
+  const log=S.habitLogs[date]||{};
+  return S.habitDefs.map(h=>({...h,done:!!log[h.id]}));
+}
+function toggleHabitDate(date,id){
+  if(!S.habitLogs[date])S.habitLogs[date]={};
+  S.habitLogs[date][id]=!S.habitLogs[date][id];
+  save();
+}
+function habitScore(date){
+  const h=getHabits(date);
+  if(h.length===0)return 0;
+  return Math.round(h.filter(x=>x.done).length/h.length*100);
+}
+// last N days habit scores
+function habitScoreHistory(n){
+  const res=[];
+  for(let i=n-1;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    res.push({date:ds,score:habitScore(ds)});
+  }
+  return res;
+}
+
+// ── Blood status ───────────────────────────────────────────────
 function bSt(k,v){
   const r={chol:{ok:200,warn:240},tg:{ok:150,warn:200},hdl:{loOk:40,hiOk:60,rev:true},ldl:{ok:100,warn:130},uric:{ok:7,warn:8.5},fbs:{ok:100,warn:126},creatinine:{lo:.6,ok:1.2,warn:1.5}};
   const d=r[k];if(!d)return{cls:'ok',lbl:'ปกติ',ic:'ti-circle-check',sc:80};
@@ -208,23 +296,23 @@ function bSt(k,v){
 }
 const bDefs={chol:{lbl:'Cholesterol',ref:'<200'},tg:{lbl:'Triglyceride',ref:'<150'},hdl:{lbl:'HDL (ไขมันดี)',ref:'≥40'},ldl:{lbl:'LDL (ไขมันเลว)',ref:'<100'},uric:{lbl:'Uric Acid',ref:'<7.0'},fbs:{lbl:'FBS (น้ำตาล)',ref:'<100'},creatinine:{lbl:'Creatinine',ref:'0.6–1.2'}};
 
-// ── Scores ────────────────────────────────────────────────────────────────
+// ── Scores ─────────────────────────────────────────────────────
 function calcScores(){
-  const l=last();const b=blood();const bV=parseFloat(bmi(l.weight,l.height));
-  const done=S.habits.filter(h=>h.done).length;
+  const l=lastLog();const b=blood();const bV=parseFloat(bmi(l.weight,l.height));
+  const act=getActivity(today());
+  const todayHabits=getHabits(today());const done=todayHabits.filter(h=>h.done).length;
   const bmiSc=bV<18.5?60:bV<23?100:bV<27.5?70:40;
   const bpSc=l.bpSys<120&&l.bpDia<80?100:l.bpSys<130?80:l.bpSys<140?60:30;
-  const hSc=Math.round((done/S.habits.length)*100);
+  const hSc=Math.round((done/S.habitDefs.length)*100);
   const bAvg=Math.round(['chol','tg','hdl','ldl','uric','fbs','creatinine'].reduce((a,k)=>a+(bSt(k,b[k]).sc||80),0)/7);
-  const stSc=(l.steps||0)>=10000?100:(l.steps||0)>=7000?80:(l.steps||0)>=5000?60:40;
-  const slSc=l.sleep>=7&&l.sleep<=9?100:l.sleep>=6?70:40;
+  const stSc=(act.steps||0)>=10000?100:(act.steps||0)>=7000?80:(act.steps||0)>=5000?60:40;
+  const slSc=(act.sleep||0)>=7&&(act.sleep||0)<=9?100:(act.sleep||0)>=6?70:40;
   const health=Math.round(bmiSc*.12+bpSc*.18+hSc*.2+bAvg*.28+stSc*.12+slSc*.1);
   const lon=Math.min(99,Math.round(bmiSc*.1+bpSc*.2+bAvg*.3+stSc*.15+slSc*.15+hSc*.1));
-  return{health,lon,bmiSc,bpSc,hSc,bAvg,stSc,slSc};
+  return{health,lon,bmiSc,bpSc,hSc,bAvg,stSc,slSc,done,total:S.habitDefs.length};
 }
 function calcBioAge(){
-  const age=parseInt(S.profile.age)||50;
-  const b=blood();const l=last();const bV=parseFloat(bmi(l.weight,l.height));
+  const age=parseInt(S.profile.age)||50;const b=blood();const l=lastLog();const bV=parseFloat(bmi(l.weight,l.height));
   let d=0;
   if(bV<23)d-=2;else if(bV<27.5)d+=1;else d+=4;
   if(l.bpSys<120)d-=2;else if(l.bpSys<130)d+=0;else if(l.bpSys<140)d+=2;else d+=5;
@@ -232,324 +320,192 @@ function calcBioAge(){
   if(b.hdl>=60)d-=2;else if(b.hdl<40)d+=3;
   if(b.ldl<100)d-=1;else if(b.ldl>=130)d+=1;
   if(b.fbs<100)d-=1;else if(b.fbs>=126)d+=4;else d+=2;
-  const done=S.habits.filter(h=>h.done).length;
+  const done=getHabits(today()).filter(h=>h.done).length;
   if(done>=5)d-=2;else if(done<3)d+=2;
-  if((l.steps||0)>=10000)d-=2;else if((l.steps||0)>=7000)d-=1;else d+=1;
-  if(l.sleep>=7&&l.sleep<=9)d-=1;else d+=1.5;
+  const act=getActivity(today());
+  if((act.steps||0)>=10000)d-=2;else if((act.steps||0)>=7000)d-=1;else d+=1;
+  if((act.sleep||0)>=7&&(act.sleep||0)<=9)d-=1;else d+=1.5;
   return Math.round(age+d);
 }
 function gH(s){return s>=90?{g:'ดีเยี่ยม',c:G}:s>=75?{g:'ดี',c:'#3B6D11'}:s>=60?{g:'พอใช้',c:'#854F0B'}:{g:'ต้องปรับ',c:'#A32D2D'};}
 function gL(s){return s>=85?{g:'อายุยืนมาก',c:G}:s>=70?{g:'อายุยืนดี',c:'#3B6D11'}:s>=55?{g:'ปานกลาง',c:'#854F0B'}:{g:'ควรดูแล',c:'#A32D2D'};}
 
 function genAdvice(){
-  const b=blood();const l=last();const items=[];
+  const b=blood();const l=lastLog();const act=getActivity(today());const items=[];
   if(b.ldl>=130)items.push({ic:'ti-salad',cat:'อาหาร',txt:'ลดไขมันอิ่มตัว หลีกเลี่ยงของทอด เพิ่มปลาทะเล โอเมก้า 3',cls:'warn'});
   if(b.chol>=200)items.push({ic:'ti-leaf',cat:'อาหาร',txt:'เพิ่มใยอาหาร ข้าวกล้อง ถั่ว ผัก ผลไม้ต่ำน้ำตาล',cls:'ok'});
   if(b.tg>=150)items.push({ic:'ti-ban',cat:'อาหาร',txt:'งดน้ำตาล เครื่องดื่มหวาน แป้งขัดขาว Triglyceride สูง',cls:'bad'});
   if(b.hdl<60)items.push({ic:'ti-run',cat:'ออกกำลังกาย',txt:'Cardio 30+ นาที/วัน อย่างน้อย 5 วัน/สัปดาห์ เพิ่ม HDL',cls:'ok'});
   if(b.uric>=7)items.push({ic:'ti-droplet',cat:'อาหาร',txt:'ดื่มน้ำ ≥2.5 ลิตร/วัน ลดเนื้อแดง เครื่องใน Uric Acid สูง',cls:'warn'});
   if(l.bpSys>=130)items.push({ic:'ti-heart',cat:'ออกกำลังกาย',txt:'เดิน ว่ายน้ำ ช่วยลดความดัน งดเกลือเกิน 6g/วัน',cls:'warn'});
-  if((l.steps||0)<8000)items.push({ic:'ti-walk',cat:'กิจกรรม',txt:`ก้าวเดินวันนี้ ${(l.steps||0).toLocaleString()} — เป้า 10,000 ก้าว`,cls:'warn'});
+  if((act.steps||0)<8000)items.push({ic:'ti-walk',cat:'กิจกรรม',txt:`ก้าวเดินวันนี้ ${(act.steps||0).toLocaleString()} — เป้า 10,000 ก้าว`,cls:'warn'});
   if(items.length===0)items.push({ic:'ti-star',cat:'ดีมาก',txt:'ค่าสุขภาพทุกด้านอยู่ในเกณฑ์ดี รักษาพฤติกรรมเดิม!',cls:'ok'});
   return items;
 }
 
-// ── SVG ring helpers ───────────────────────────────────────────────────────
+// ── SVG rings ──────────────────────────────────────────────────
 function ring(pct,color,size,stroke,label,sub){
   const r=size/2-stroke/2;const circ=2*Math.PI*r;const dash=pct/100*circ;
-  return`<div class="ring-item"><svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#f0f0f0" stroke-width="${stroke}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 ${size/2} ${size/2})"/><text x="${size/2}" y="${size/2+1}" text-anchor="middle" dominant-baseline="middle" font-size="${size>70?15:12}" font-weight="700" fill="${color}">${pct}%</text></svg><div class="ring-lbl">${label}</div><div class="ring-sub">${sub}</div></div>`;
+  return`<div class="ring-item"><svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="${label} ${pct}%"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#f0f0f0" stroke-width="${stroke}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 ${size/2} ${size/2})"/><text x="${size/2}" y="${size/2+1}" text-anchor="middle" dominant-baseline="middle" font-size="${size>70?15:12}" font-weight="700" fill="${color}">${pct}%</text></svg><div class="ring-lbl">${label}</div><div class="ring-sub">${sub}</div></div>`;
 }
-function ringHabit(h,pct,color,size){
+function ringSmall(pct,color,size,label){
   const r=size/2-4;const circ=2*Math.PI*r;const dash=pct/100*circ;
-  return`<div class="hs-item"><svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#f0f0f0" stroke-width="4"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="4" stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 ${size/2} ${size/2})"/><text x="${size/2}" y="${size/2+1}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="700" fill="${color}">${pct}%</text></svg><div class="hs-lbl">${h}</div></div>`;
+  return`<div class="hs-item"><svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="${label} ${pct}%"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#f0f0f0" stroke-width="4"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="4" stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 ${size/2} ${size/2})"/><text x="${size/2}" y="${size/2+1}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="700" fill="${color}">${pct}%</text></svg><div class="hs-lbl">${label}</div></div>`;
 }
 
-// ── Progress calc ──────────────────────────────────────────────────────────
+// ── Progress calc ──────────────────────────────────────────────
 function calcProgress(){
-  const done=S.habits.filter(h=>h.done).length;
-  const wkPct=Math.round((done/S.habits.length)*100);
-  const l=last();const f=S.logs[0];
-  const wProgress=Math.min(100,Math.round((S.goals.startWeight-l.weight)/(S.goals.startWeight-S.goals.weight)*100));
-  const bpProgress=Math.min(100,Math.round((143-l.bpSys)/(143-S.goals.bpSys)*100));
-  const monthPct=Math.round((wkPct+Math.max(0,wProgress)+Math.max(0,bpProgress))/3);
+  const l=lastLog();const f=S.logs[0];
+  const wProgress=Math.min(100,Math.max(0,Math.round((S.goals.startWeight-l.weight)/(S.goals.startWeight-S.goals.weight)*100)));
+  const bpProgress=Math.min(100,Math.max(0,Math.round((143-l.bpSys)/(143-S.goals.bpSys)*100)));
+  const sc=calcScores();
+  const wkPct=sc.hSc;
+  const hist7=habitScoreHistory(7);
+  const monthPct=Math.round(hist7.reduce((a,x)=>a+x.score,0)/hist7.length);
+  const day90Pct=Math.round((wProgress+bpProgress)/2);
   const wtLost=parseFloat((f.weight-l.weight).toFixed(1));
   const bpDrop=Math.round(f.bpSys-l.bpSys);
-  const stepUp=Math.round((l.steps||0)-(f.steps||0));
-  return{wkPct,monthPct,day90Pct:Math.round((Math.max(0,wProgress)+Math.max(0,bpProgress))/2),wtLost,bpDrop,stepUp,done,total:S.habits.length,wProgress:Math.max(0,wProgress),bpProgress:Math.max(0,bpProgress)};
+  const actToday=getActivity(today());
+  const actFirst=getActivity(f.date);
+  const stepUp=Math.round((actToday.steps||0)-(actFirst.steps||0));
+  return{wkPct,monthPct,day90Pct,wtLost,bpDrop,stepUp,wProgress,bpProgress};
 }
 
-// ══════════════════════════════════════════════════════════════════════════
-// SETTINGS PAGE (Profile + Data Storage)
-// ══════════════════════════════════════════════════════════════════════════
-function renderSettings(){
-  const p=S.profile;
-  const dataStr=JSON.stringify(S);
-  const dataSize=new Blob([dataStr]).size;
-  const dataSizeKB=(dataSize/1024).toFixed(1);
-  const pct=Math.min(100,Math.round(dataSize/51200*100)); // 50KB limit estimate
-  const logCount=S.logs.length;const bloodCount=S.bloodHistory.length;const foodCount=S.food.length;
-
-  document.getElementById('pg').innerHTML=`
-  <!-- Profile Card -->
-  <div class="profile-card" style="margin-top:4px">
-    <div class="avatar">${p.name?initials(p.name):'?'}</div>
-    <div style="font-size:18px;font-weight:700;margin-bottom:3px">${p.name||'ยังไม่ได้ตั้งชื่อ'}</div>
-    <div style="font-size:13px;color:#888">${p.age?'อายุ '+p.age+' ปี':''}${p.age&&p.gender?' · ':''}${p.gender||''}</div>
-    ${p.bloodType?`<div style="font-size:12px;color:#888;margin-top:3px">หมู่เลือด ${p.bloodType}</div>`:''}
-    <button class="btn" style="margin-top:12px;max-width:200px;margin-left:auto;margin-right:auto" onclick="openProfileModal()"><i class="ti ti-edit"></i>แก้ไขข้อมูลส่วนตัว</button>
-  </div>
-
-  <!-- Medical Info -->
-  <div class="card">
-    <div class="ctitle"><i class="ti ti-stethoscope" style="color:${G}"></i>ข้อมูลสุขภาพส่วนตัว</div>
-    ${[
-      {lbl:'โรคประจำตัว',val:p.congenital||'ยังไม่ได้บันทึก',ic:'ti-heart-plus'},
-      {lbl:'ยาที่ใช้ประจำ',val:p.medications||'ยังไม่ได้บันทึก',ic:'ti-pill'},
-      {lbl:'แพทย์ประจำ',val:p.doctor||'ยังไม่ได้บันทึก',ic:'ti-user-heart'},
-      {lbl:'โรงพยาบาล',val:p.hospital||'ยังไม่ได้บันทึก',ic:'ti-building-hospital'},
-      {lbl:'เบอร์ฉุกเฉิน',val:p.emergency||'ยังไม่ได้บันทึก',ic:'ti-phone-call'},
-    ].map(x=>`<div class="storage-row">
-      <div class="storage-icon" style="background:#f5f7f5"><i class="ti ${x.ic}" style="color:${G}"></i></div>
-      <div><div style="font-size:11px;color:#888;margin-bottom:2px">${x.lbl}</div><div style="font-size:13px;font-weight:500">${x.val}</div></div>
-    </div>`).join('')}
-    <button class="btn btn-o" style="margin-top:8px" onclick="openProfileModal()"><i class="ti ti-edit"></i>แก้ไข</button>
-  </div>
-
-  <!-- Data Storage Info -->
-  <div class="card">
-    <div class="ctitle"><i class="ti ti-database" style="color:${G}"></i>ข้อมูลเก็บที่ไหน?</div>
-    <div class="storage-row">
-      <div class="storage-icon" style="background:#EAF3DE"><i class="ti ti-device-mobile" style="color:${G}"></i></div>
-      <div><div style="font-size:13px;font-weight:600;color:${G}">localStorage ในมือถือของคุณ</div><div style="font-size:12px;color:#888;margin-top:2px;line-height:1.5">ข้อมูลทั้งหมดเก็บอยู่ในเบราว์เซอร์บนเครื่องของคุณเท่านั้น ไม่มีการส่งข้อมูลไปที่เซิร์ฟเวอร์ใดๆ ทั้งสิ้น</div></div>
-    </div>
-    <div class="storage-row">
-      <div class="storage-icon" style="background:#E6F1FB"><i class="ti ti-lock" style="color:#185FA5"></i></div>
-      <div><div style="font-size:13px;font-weight:600;color:#185FA5">ความปลอดภัย 100%</div><div style="font-size:12px;color:#888;margin-top:2px;line-height:1.5">ไม่มีบัญชีผู้ใช้ ไม่มีคลาวด์ ไม่มีใครเข้าถึงข้อมูลสุขภาพของคุณได้นอกจากตัวคุณเอง</div></div>
-    </div>
-    <div class="storage-row">
-      <div class="storage-icon" style="background:#FAEEDA"><i class="ti ti-alert-triangle" style="color:#854F0B"></i></div>
-      <div><div style="font-size:13px;font-weight:600;color:#854F0B">ข้อควรระวัง</div><div style="font-size:12px;color:#888;margin-top:2px;line-height:1.5">ถ้าลบแอป หรือ Clear Browser Data ข้อมูลจะหาย — แนะนำ Export สำรองข้อมูลไว้เสมอ</div></div>
-    </div>
-  </div>
-
-  <!-- Data size -->
-  <div class="card">
-    <div class="ctitle"><i class="ti ti-chart-donut" style="color:${G}"></i>ขนาดข้อมูลที่เก็บ</div>
-    <div style="font-size:22px;font-weight:700;color:${G};margin-bottom:4px">${dataSizeKB} KB</div>
-    <div class="ds-bar"><div class="ds-fill" style="width:${pct}%"></div></div>
-    <div style="font-size:11px;color:#888;margin-bottom:12px">${pct}% ของพื้นที่ที่แนะนำ (50 KB)</div>
-    <div class="g2" style="margin-bottom:0">
-      <div class="sc"><div class="slbl">บันทึกสุขภาพ</div><div class="sval" style="font-size:22px">${logCount}</div><div style="font-size:11px;color:#888">ครั้ง</div></div>
-      <div class="sc"><div class="slbl">ผลเลือด</div><div class="sval" style="font-size:22px">${bloodCount}</div><div style="font-size:11px;color:#888">ครั้ง</div></div>
-    </div>
-  </div>
-
-  <!-- Export / Import -->
-  <div class="card">
-    <div class="ctitle"><i class="ti ti-refresh" style="color:${G}"></i>สำรองและกู้คืนข้อมูล</div>
-    <p style="font-size:13px;color:#666;margin-bottom:12px;line-height:1.6">แนะนำ Export ข้อมูลไว้เป็นไฟล์ JSON ทุก 1–2 เดือน เพื่อสำรองไว้กรณีเปลี่ยนเครื่องหรือเบราว์เซอร์</p>
-    <button class="btn" onclick="exportData()"><i class="ti ti-download"></i>Export ข้อมูล (ดาวน์โหลด JSON)</button>
-    <button class="btn btn-o" style="margin-top:8px" onclick="document.getElementById('importFile').click()"><i class="ti ti-upload"></i>Import ข้อมูล (นำเข้า JSON)</button>
-    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-  </div>
-
-  <!-- Reset -->
-  <div class="card">
-    <div class="ctitle"><i class="ti ti-trash" style="color:var(--rd)"></i>ล้างข้อมูลทั้งหมด</div>
-    <p style="font-size:13px;color:#666;margin-bottom:10px;line-height:1.6">ลบข้อมูลทุกอย่างและเริ่มต้นใหม่ทั้งหมด ไม่สามารถกู้คืนได้</p>
-    <button class="btn btn-r" onclick="confirmReset()"><i class="ti ti-trash"></i>ล้างข้อมูลทั้งหมด</button>
-  </div>
-  `;
+// ── Date navigation helper ─────────────────────────────────────
+function dateNavHTML(dateKey,prevFn,nextFn){
+  const d=new Date(dateKey+'T00:00:00');
+  const thM=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const label=`${d.getDate()} ${thM[d.getMonth()]} ${d.getFullYear()+543}`;
+  const isToday=dateKey===today();
+  return`<div class="date-nav"><button class="date-nav-btn" onclick="${prevFn}()"><i class="ti ti-chevron-left"></i></button><div style="text-align:center"><div class="date-nav-label">${label}</div>${isToday?'<div style="font-size:10px;color:var(--g);margin-top:1px">วันนี้</div>':''}</div><button class="date-nav-btn" onclick="${nextFn}()" ${isToday?'disabled style="opacity:.3"':''}><i class="ti ti-chevron-right"></i></button></div>`;
+}
+function shiftDate(dateStr,days){
+  const d=new Date(dateStr+'T00:00:00');d.setDate(d.getDate()+days);return d.toISOString().slice(0,10);
 }
 
-// ── Profile Modal ──────────────────────────────────────────────────────────
-function openProfileModal(){
-  const p=S.profile;
-  const m=document.createElement('div');
-  m.className='modal-bg';m.id='profileModal';
-  m.innerHTML=`<div class="modal">
-    <div class="modal-title">แก้ไขข้อมูลส่วนตัว<button onclick="closeModal()" style="background:none;border:none;cursor:pointer;font-size:22px;color:#888;padding:0"><i class="ti ti-x"></i></button></div>
-    <div class="sec">ข้อมูลทั่วไป</div>
-    <div class="fg"><label class="flbl">ชื่อ-นามสกุล</label><input type="text" id="pName" placeholder="เช่น วิโรจน์ ใจดี" value="${p.name||''}"></div>
-    <div class="g2">
-      <div class="fg"><label class="flbl">อายุ (ปี)</label><input type="number" id="pAge" placeholder="50" value="${p.age||''}" min="1" max="120"></div>
-      <div class="fg"><label class="flbl">เพศ</label><select id="pGender"><option value="">-- เลือก --</option><option value="ชาย" ${p.gender==='ชาย'?'selected':''}>ชาย</option><option value="หญิง" ${p.gender==='หญิง'?'selected':''}>หญิง</option></select></div>
-    </div>
-    <div class="g2">
-      <div class="fg"><label class="flbl">ส่วนสูง (ซม.)</label><input type="number" id="pHeight" placeholder="170" value="${p.height||''}" step="1"></div>
-      <div class="fg"><label class="flbl">หมู่เลือด</label><select id="pBlood"><option value="">-- เลือก --</option>${['A','B','AB','O'].flatMap(b=>['ผสม +','ผสม -'].map((s,i)=>`<option value="${b}${i===0?'+':'-'}" ${p.bloodType===b+(i===0?'+':'-')?'selected':''}>${b}${i===0?'+':'-'}</option>`)).join('')}</select></div>
-    </div>
-    <div class="sec">ข้อมูลทางการแพทย์</div>
-    <div class="fg"><label class="flbl">โรคประจำตัว</label><input type="text" id="pCon" placeholder="เช่น ความดันสูง เบาหวาน" value="${p.congenital||''}"></div>
-    <div class="fg"><label class="flbl">ยาที่ใช้ประจำ</label><input type="text" id="pMed" placeholder="เช่น Amlodipine 5mg" value="${p.medications||''}"></div>
-    <div class="fg"><label class="flbl">ชื่อแพทย์ประจำ</label><input type="text" id="pDoc" placeholder="เช่น นพ.สมชาย ใจดี" value="${p.doctor||''}"></div>
-    <div class="fg"><label class="flbl">โรงพยาบาล / คลินิก</label><input type="text" id="pHos" placeholder="เช่น รพ.กรุงเทพ" value="${p.hospital||''}"></div>
-    <div class="fg"><label class="flbl">เบอร์โทรฉุกเฉิน</label><input type="tel" id="pEm" placeholder="เช่น 081-xxx-xxxx" value="${p.emergency||''}"></div>
-    <button class="btn" onclick="saveProfile()"><i class="ti ti-device-floppy"></i>บันทึกข้อมูลส่วนตัว</button>
-    <div style="height:20px"></div>
-  </div>`;
-  document.body.appendChild(m);
-  m.addEventListener('click',e=>{if(e.target===m)closeModal();});
-}
-function closeModal(){const m=document.getElementById('profileModal');if(m)m.remove();}
-function saveProfile(){
-  S.profile.name=document.getElementById('pName').value.trim();
-  S.profile.age=document.getElementById('pAge').value;
-  S.profile.gender=document.getElementById('pGender').value;
-  S.profile.height=parseFloat(document.getElementById('pHeight').value)||S.profile.height;
-  S.profile.bloodType=document.getElementById('pBlood').value;
-  S.profile.congenital=document.getElementById('pCon').value.trim();
-  S.profile.medications=document.getElementById('pMed').value.trim();
-  S.profile.doctor=document.getElementById('pDoc').value.trim();
-  S.profile.hospital=document.getElementById('pHos').value.trim();
-  S.profile.emergency=document.getElementById('pEm').value.trim();
-  save();closeModal();updateHeader();
-  toast('✓ บันทึกข้อมูลส่วนตัวเรียบร้อย!');
-  if(S.page==='settings')renderSettings();
-}
-
-// ── Export / Import / Reset ────────────────────────────────────────────────
-function exportData(){
-  const data=JSON.stringify(S,null,2);
-  const blob=new Blob([data],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  const d=new Date();
-  a.href=url;a.download=`health-tracker-backup-${d.toISOString().slice(0,10)}.json`;
-  a.click();URL.revokeObjectURL(url);
-  toast('✓ Export ข้อมูลสำเร็จ!');
-}
-function importData(e){
-  const file=e.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    try{
-      const imported=JSON.parse(ev.target.result);
-      if(!imported.logs||!imported.bloodHistory){toast('⚠ ไฟล์ไม่ถูกต้อง',true);return;}
-      Object.assign(S,imported);save();updateHeader();
-      toast('✓ Import ข้อมูลสำเร็จ!');
-      setTimeout(()=>renderSettings(),600);
-    }catch(err){toast('⚠ ไฟล์ไม่ถูกต้อง',true);}
-  };
-  reader.readAsText(file);
-  e.target.value='';
-}
-function confirmReset(){
-  if(confirm('ต้องการล้างข้อมูลทั้งหมดจริงหรือไม่?\nการกระทำนี้ไม่สามารถกู้คืนได้')){
-    localStorage.removeItem(SK);S=defState();save();
-    updateHeader();toast('ล้างข้อมูลเรียบร้อย');
-    setTimeout(()=>go('dash'),600);
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 // DASHBOARD
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 function renderDash(){
   const sc=calcScores();const hg=gH(sc.health);const lg=gL(sc.lon);
-  const l=last();const bV=bmi(l.weight,l.height);const bN=parseFloat(bV);
+  const l=lastLog();const bV=bmi(l.weight,l.height);const bN=parseFloat(bV);
   const bmiCls=bN<18.5?'low':bN<23?'ok':bN<27.5?'warn':'bad';
   const bpCls=l.bpSys<120&&l.bpDia<80?'ok':l.bpSys<130?'warn':'bad';
   const bioAge=calcBioAge();const aD=bioAge-(parseInt(S.profile.age)||50);
-  const total=S.food.reduce((a,f)=>a+f.cal,0);
+  const act=getActivity(today());
+  const todayFood=getFoodForDate(today());
+  const totalCal=todayFood.reduce((a,f)=>a+f.cal,0);
   const p=calcProgress();
   const name=S.profile.name;
+  const hist7=habitScoreHistory(7);
+  const todayHabits=getHabits(today());
 
   document.getElementById('pg').innerHTML=`
-  ${name?`<div style="padding:4px 0 0;font-size:14px;font-weight:600;color:#1a1a1a">สวัสดีครับ ${name} 👋</div>`:''}
-
+  ${name?`<div style="padding:4px 0 2px;font-size:14px;font-weight:600;color:#1a1a1a">สวัสดีครับ ${name} 👋</div>`:''}
   <div class="score-row" style="margin-top:8px">
-    <div class="score-box"><div class="score-num" style="color:${hg.c}">${sc.health}</div><div class="score-lbl">Health Score</div><div class="score-grade" style="color:${hg.c}">${hg.g}</div><div style="height:5px;background:#f0f0f0;border-radius:3px;margin-top:7px"><div style="width:${sc.health}%;height:100%;background:${hg.c};border-radius:3px"></div></div></div>
-    <div class="score-box"><div class="score-num" style="color:${lg.c}">${sc.lon}</div><div class="score-lbl">Longevity Score</div><div class="score-grade" style="color:${lg.c}">${lg.g}</div><div style="height:5px;background:#f0f0f0;border-radius:3px;margin-top:7px"><div style="width:${sc.lon}%;height:100%;background:${lg.c};border-radius:3px"></div></div></div>
+    <div class="score-box"><div class="score-num" style="color:${hg.c}">${sc.health}</div><div class="score-lbl">Health Score</div><div class="score-grade" style="color:${hg.c}">${hg.g}</div><div style="height:5px;background:#f0f0f0;border-radius:3px;margin-top:6px"><div style="width:${sc.health}%;height:100%;background:${hg.c};border-radius:3px"></div></div></div>
+    <div class="score-box"><div class="score-num" style="color:${lg.c}">${sc.lon}</div><div class="score-lbl">Longevity Score</div><div class="score-grade" style="color:${lg.c}">${lg.g}</div><div style="height:5px;background:#f0f0f0;border-radius:3px;margin-top:6px"><div style="width:${sc.lon}%;height:100%;background:${lg.c};border-radius:3px"></div></div></div>
   </div>
 
   <div class="card">
     <div class="ctitle"><i class="ti ti-chart-pie" style="color:${G}"></i>ความคืบหน้าเป้าหมาย</div>
     <div class="ring-wrap">
-      ${ring(p.wkPct,p.wkPct>=70?G:'#854F0B',80,8,'สัปดาห์นี้',`${p.done}/${p.total} ข้อ`)}
-      ${ring(p.monthPct,p.monthPct>=70?G:'#854F0B',80,8,'เดือนนี้','เฉลี่ยทุกด้าน')}
-      ${ring(p.day90Pct,G,80,8,'90 วัน','เป้าหลัก')}
+      ${ring(p.wkPct,p.wkPct>=70?G:'#854F0B',80,8,'กิจกรรมวันนี้',`${sc.done}/${sc.total} ข้อ`)}
+      ${ring(p.monthPct,p.monthPct>=70?G:'#854F0B',80,8,'เฉลี่ย 7 วัน','Habit Score')}
+      ${ring(p.day90Pct,G,80,8,'เป้าหมายหลัก','น้ำหนัก+ความดัน')}
     </div>
-    <div class="hs-row" style="margin-top:4px">
-      ${S.habits.map(h=>ringHabit(h.text,h.done?100:0,h.done?G:'#ddd',48)).join('')}
+    <div class="hs-row">
+      ${todayHabits.map(h=>ringSmall(h.done?100:0,h.done?G:'#ddd',48,h.text)).join('')}
     </div>
   </div>
 
   <div class="g2">
-    <div class="sc"><div class="slbl"><i class="ti ti-weight"></i>น้ำหนัก / BMI</div><div class="sval">${fmt(l.weight)} <span class="sunit">กก.</span></div><div style="margin-top:4px">${bdg(bmiCls,'BMI '+bV,bmiCls==='ok'?'ti-circle-check':'ti-alert-triangle')}</div></div>
+    <div class="sc"><div class="slbl"><i class="ti ti-weight"></i>น้ำหนัก</div><div class="sval">${fmt(l.weight)} <span class="sunit">กก.</span></div><div style="margin-top:4px">${bdg(bmiCls,'BMI '+bV,bmiCls==='ok'?'ti-circle-check':'ti-alert-triangle')}</div></div>
     <div class="sc"><div class="slbl"><i class="ti ti-heart"></i>ความดัน</div><div class="sval" style="font-size:16px">${l.bpSys}/${l.bpDia} <span class="sunit">mmHg</span></div><div style="margin-top:4px">${bdg(bpCls,bpCls==='ok'?'ปกติ':bpCls==='warn'?'สูงเล็กน้อย':'สูง',bpCls==='ok'?'ti-circle-check':'ti-alert-triangle')}</div></div>
-    <div class="sc"><div class="slbl"><i class="ti ti-walk"></i>ก้าวเดิน</div><div class="sval" style="font-size:17px">${(l.steps||0).toLocaleString()}</div><div style="margin-top:4px">${bdg((l.steps||0)>=10000?'ok':(l.steps||0)>=7000?'warn':'bad','เป้า 10,000',(l.steps||0)>=10000?'ti-circle-check':'ti-alert-triangle')}</div></div>
-    <div class="sc"><div class="slbl"><i class="ti ti-brain"></i>Biological Age</div><div class="sval" style="font-size:17px">${bioAge} <span class="sunit">ปี</span></div><div style="margin-top:4px">${bdg(aD<=0?'ok':'bad',aD<=0?`น้อยกว่า ${Math.abs(aD)} ปี`:`มากกว่า ${Math.abs(aD)} ปี`,aD<=0?'ti-trending-down':'ti-trending-up')}</div></div>
+    <div class="sc"><div class="slbl"><i class="ti ti-walk"></i>ก้าวเดินวันนี้</div><div class="sval" style="font-size:17px">${(act.steps||0).toLocaleString()}</div><div style="margin-top:4px">${bdg((act.steps||0)>=10000?'ok':(act.steps||0)>=7000?'warn':'bad',(act.steps||0)>=10000?'ถึงเป้า':'เป้า 10,000',(act.steps||0)>=10000?'ti-circle-check':'ti-alert-triangle')}</div></div>
+    <div class="sc"><div class="slbl"><i class="ti ti-moon"></i>นอนหลับวันนี้</div><div class="sval" style="font-size:17px">${fmt(act.sleep||0)} <span class="sunit">ชม.</span></div><div style="margin-top:4px">${bdg((act.sleep||0)>=7?'ok':'warn',(act.sleep||0)>=7?'เพียงพอ':'น้อยไป',(act.sleep||0)>=7?'ti-circle-check':'ti-alert-triangle')}</div></div>
   </div>
 
   <div class="card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
       <div class="ctitle" style="margin-bottom:0"><i class="ti ti-salad" style="color:${G}"></i>แคลอรี่วันนี้</div>
-      <span style="font-size:15px;font-weight:700;color:${total<=2000?G:'#A32D2D'}">${total} <span style="font-size:11px;font-weight:400;color:#888">/ 2,000 kcal</span></span>
+      <span style="font-size:15px;font-weight:700;color:${totalCal<=S.goals.calGoal?G:'#A32D2D'}">${totalCal} <span style="font-size:11px;font-weight:400;color:#888">/ ${S.goals.calGoal}</span></span>
     </div>
-    <div style="height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden"><div style="width:${Math.min(100,Math.round(total/2000*100))}%;height:100%;background:${total<=2000?G:'#A32D2D'};border-radius:4px"></div></div>
-    <div style="font-size:11px;color:#888;margin-top:4px">เหลือ ${Math.max(0,2000-total)} kcal</div>
+    <div style="height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden"><div style="width:${Math.min(100,Math.round(totalCal/S.goals.calGoal*100))}%;height:100%;background:${totalCal<=S.goals.calGoal?G:'#A32D2D'};border-radius:4px"></div></div>
+    <div style="font-size:11px;color:#888;margin-top:4px">เหลือ ${Math.max(0,S.goals.calGoal-totalCal)} kcal · ${todayFood.length} รายการ</div>
   </div>
 
   <div class="card">
     <div class="ctitle"><i class="ti ti-bulb" style="color:#BA7517"></i>คำแนะนำสุขภาพ</div>
-    ${genAdvice().slice(0,3).map(a=>`<div class="ai"><i class="ti ${a.ic}" style="font-size:19px;color:${a.cls==='ok'?G:a.cls==='warn'?'#854F0B':'#A32D2D'};flex-shrink:0;width:22px;margin-top:1px"></i><div><div style="font-size:11px;font-weight:600;color:#888;margin-bottom:1px">${a.cat}</div><div style="font-size:13px;line-height:1.4">${a.txt}</div></div></div>`).join('')}
+    ${genAdvice().slice(0,3).map(a=>`<div class="ai"><i class="ti ${a.ic}" style="font-size:18px;color:${a.cls==='ok'?G:a.cls==='warn'?'#854F0B':'#A32D2D'};flex-shrink:0;width:22px;margin-top:1px"></i><div><div style="font-size:11px;font-weight:600;color:#888;margin-bottom:1px">${a.cat}</div><div style="font-size:13px;line-height:1.4">${a.txt}</div></div></div>`).join('')}
   </div>
   <button class="btn" onclick="go('log')"><i class="ti ti-plus"></i>บันทึกข้อมูลวันนี้</button>`;
 }
 
-// ══════════════════════════════════════════════════════════════════════════
-// LOG
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+// LOG (weight/bp/waist + activity per day)
+// ══════════════════════════════════════════════════════════════
 function renderLog(){
-  const l=last();
+  const l=lastLog();const act=getActivity(today());
   document.getElementById('pg').innerHTML=`
   <div class="card" style="margin-top:4px">
     <div class="fg"><label class="flbl">วันที่</label><input type="date" id="lDate" value="${today()}"></div>
-    <div class="sec">ร่างกาย</div>
+    <div class="sec">ข้อมูลร่างกาย</div>
     <div class="g2">
       <div class="fg"><label class="flbl">น้ำหนัก (กก.)</label><input type="number" id="lW" placeholder="${l.weight}" step="0.1"></div>
       <div class="fg"><label class="flbl">ส่วนสูง (ซม.)</label><input type="number" id="lH" placeholder="${l.height}" step="1"></div>
     </div>
     <div class="fg"><label class="flbl">รอบเอว (ซม.)</label><input type="number" id="lWst" placeholder="${l.waist}" step="0.5"></div>
-    <div class="sec">ความดัน</div>
+    <div class="sec">ความดันโลหิต</div>
     <div class="g2">
       <div class="fg"><label class="flbl">ตัวบน SYS (mmHg)</label><input type="number" id="lSys" placeholder="${l.bpSys}" step="1"></div>
       <div class="fg"><label class="flbl">ตัวล่าง DIA (mmHg)</label><input type="number" id="lDia" placeholder="${l.bpDia}" step="1"></div>
     </div>
-    <div class="sec">กิจกรรม & การนอน</div>
+    <div class="sec">กิจกรรมประจำวัน</div>
     <div class="g2">
-      <div class="fg"><label class="flbl">ก้าวเดิน</label><input type="number" id="lSt" placeholder="${l.steps||0}" step="100"></div>
-      <div class="fg"><label class="flbl">ชั่วโมงนอน</label><input type="number" id="lSl" placeholder="${l.sleep||7}" step="0.5"></div>
+      <div class="fg"><label class="flbl">ก้าวเดิน</label><input type="number" id="lSt" placeholder="${act.steps||0}" step="100"></div>
+      <div class="fg"><label class="flbl">ชั่วโมงนอน</label><input type="number" id="lSl" placeholder="${act.sleep||7}" step="0.5"></div>
     </div>
     <div class="fg"><label class="flbl">คุณภาพการนอน</label>
-      <select id="lSlQ"><option value="1">1 — แย่มาก</option><option value="2">2 — พอใช้</option><option value="3" ${(l.sleepQ||3)===3?'selected':''}>3 — ดี</option><option value="4" ${(l.sleepQ||3)===4?'selected':''}>4 — ดีมาก</option></select>
+      <select id="lSlQ">
+        <option value="1">1 — แย่มาก</option>
+        <option value="2">2 — พอใช้</option>
+        <option value="3" ${(act.sleepQ||3)===3?'selected':''}>3 — ดี</option>
+        <option value="4" ${(act.sleepQ||3)===4?'selected':''}>4 — ดีมาก</option>
+      </select>
     </div>
   </div>
   <button class="btn" onclick="saveLog()"><i class="ti ti-device-floppy"></i>บันทึกข้อมูล</button>`;
 }
 function saveLog(){
-  const l=last();
-  S.logs.push({date:document.getElementById('lDate').value,weight:parseFloat(document.getElementById('lW').value)||l.weight,height:parseFloat(document.getElementById('lH').value)||l.height,waist:parseFloat(document.getElementById('lWst').value)||l.waist,bpSys:parseFloat(document.getElementById('lSys').value)||l.bpSys,bpDia:parseFloat(document.getElementById('lDia').value)||l.bpDia,steps:parseFloat(document.getElementById('lSt').value)||l.steps,sleep:parseFloat(document.getElementById('lSl').value)||l.sleep,sleepQ:parseInt(document.getElementById('lSlQ').value)||3});
+  const l=lastLog();const date=document.getElementById('lDate').value;
+  const w=parseFloat(document.getElementById('lW').value)||l.weight;
+  const h=parseFloat(document.getElementById('lH').value)||l.height;
+  const wst=parseFloat(document.getElementById('lWst').value)||l.waist;
+  const sys=parseFloat(document.getElementById('lSys').value)||l.bpSys;
+  const dia=parseFloat(document.getElementById('lDia').value)||l.bpDia;
+  // save body log
+  const existing=S.logs.findIndex(x=>x.date===date);
+  const entry={date,weight:w,height:h,waist:wst,bpSys:sys,bpDia:dia};
+  if(existing>=0)S.logs[existing]=entry;else S.logs.push(entry);
+  S.logs.sort((a,b)=>a.date.localeCompare(b.date));
+  // save activity
+  setActivity(date,{steps:parseFloat(document.getElementById('lSt').value)||0,sleep:parseFloat(document.getElementById('lSl').value)||0,sleepQ:parseInt(document.getElementById('lSlQ').value)||3});
   save();toast('✓ บันทึกเรียบร้อย!');setTimeout(()=>go('dash'),800);
 }
 
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 // BLOOD
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
 function renderBlood(){
   const t=S.bloodTab;
-  document.getElementById('pg').innerHTML=`<div class="tabs" style="margin-top:4px"><button class="tab ${t==='result'?'active':''}" onclick="switchBTab('result')">ผลล่าสุด</button><button class="tab ${t==='compare'?'active':''}" onclick="switchBTab('compare')">เปรียบเทียบ</button><button class="tab ${t==='input'?'active':''}" onclick="switchBTab('input')">บันทึกผล</button></div><div id="bC"></div>`;
-  renderBTab(t);
-}
-function switchBTab(t){S.bloodTab=t;renderBlood();}
-function renderBTab(t){
+  document.getElementById('pg').innerHTML=`<div class="tabs" style="margin-top:4px"><button class="tab ${t==='result'?'active':''}" onclick="S.bloodTab='result';renderBlood()">ผลล่าสุด</button><button class="tab ${t==='compare'?'active':''}" onclick="S.bloodTab='compare';renderBlood()">เปรียบเทียบ</button><button class="tab ${t==='input'?'active':''}" onclick="S.bloodTab='input';renderBlood()">บันทึกผล</button></div><div id="bC"></div>`;
   const b=blood();const pb=prevBlood();const c=document.getElementById('bC');
   if(t==='result'){
-    c.innerHTML=`<div class="card">${Object.keys(bDefs).map(k=>{const st=bSt(k,b[k]);const d=bDefs[k];const col=st.cls==='ok'?'#27500A':st.cls==='warn'?'#633806':st.cls==='low'?'#185FA5':'#791F1F';return`<div class="brow"><div style="flex:1"><div style="font-size:13px;font-weight:600">${d.lbl}</div><div style="font-size:10px;color:#999">เป้า ${d.ref} mg/dL</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:700;color:${col}">${b[k]} <span style="font-size:10px;font-weight:400;color:#888">mg/dL</span></div>${bdg(st.cls,st.lbl,st.ic)}</div></div>`;}).join('')}</div>`;
+    c.innerHTML=`<div style="font-size:11px;color:#888;margin-bottom:6px">ผลตรวจวันที่ ${b.date}</div><div class="card">${Object.keys(bDefs).map(k=>{const st=bSt(k,b[k]);const d=bDefs[k];const col=st.cls==='ok'?'#27500A':st.cls==='warn'?'#633806':st.cls==='low'?'#185FA5':'#791F1F';return`<div class="brow"><div style="flex:1"><div style="font-size:13px;font-weight:600">${d.lbl}</div><div style="font-size:10px;color:#999">เป้า ${d.ref} mg/dL</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:700;color:${col}">${b[k]} <span style="font-size:10px;font-weight:400;color:#888">mg/dL</span></div>${bdg(st.cls,st.lbl,st.ic)}</div></div>`;}).join('')}</div>`;
   }else if(t==='compare'){
-    if(!pb){c.innerHTML=`<div class="card"><div class="empty"><i class="ti ti-info-circle"></i>ยังไม่มีผลเลือดครั้งก่อน</div></div>`;return;}
-    c.innerHTML=`<div class="card"><div style="display:grid;grid-template-columns:1fr 52px 1fr;gap:4px;margin-bottom:8px;font-size:10px;color:#999;text-align:center;font-weight:600"><div>${pb.date}</div><div></div><div>${b.date}</div></div>${Object.keys(bDefs).map(k=>{const diff=parseFloat((b[k]-pb[k]).toFixed(1));const better=k==='hdl'?diff>0:diff<0;const ai=diff===0?'ti-minus':diff<0?'ti-arrow-down':'ti-arrow-up';const col=better?G:'#A32D2D';return`<div style="display:grid;grid-template-columns:1fr 52px 1fr;gap:4px;padding:8px 0;border-bottom:1px solid #f5f5f5;align-items:center"><div><div class="cv" style="color:#888">${pb[k]}</div><div class="cl">${bDefs[k].lbl}</div></div><div style="text-align:center"><i class="ti ${ai}" style="font-size:18px;color:${col}"></i><div style="font-size:10px;color:${col};font-weight:600">${diff>0?'+':''}${diff}</div></div><div><div class="cv" style="color:${better?'#27500A':'#791F1F'}">${b[k]}</div>${bdg(better?'ok':'bad',better?'ดีขึ้น':'แย่ลง',better?'ti-circle-check':'ti-circle-x')}</div></div>`;}).join('')}</div>`;
+    if(!pb){c.innerHTML=`<div class="card" style="text-align:center;padding:24px;color:#999"><i class="ti ti-info-circle" style="font-size:28px;display:block;margin-bottom:8px"></i>ยังไม่มีผลเลือดครั้งก่อน</div>`;return;}
+    c.innerHTML=`<div class="card"><div style="display:grid;grid-template-columns:1fr 52px 1fr;gap:4px;margin-bottom:8px;font-size:10px;color:#999;text-align:center;font-weight:600"><div>${pb.date}</div><div></div><div>${b.date}</div></div>${Object.keys(bDefs).map(k=>{const diff=parseFloat((b[k]-pb[k]).toFixed(1));const better=k==='hdl'?diff>0:diff<0;const ai=diff===0?'ti-minus':diff<0?'ti-arrow-down':'ti-arrow-up';const col=better?G:'#A32D2D';return`<div style="display:grid;grid-template-columns:1fr 52px 1fr;gap:4px;padding:8px 0;border-bottom:1px solid #f5f5f5;align-items:center"><div><div style="font-size:15px;font-weight:600;text-align:center;color:#888">${pb[k]}</div><div style="font-size:10px;color:#999;text-align:center;margin-top:2px">${bDefs[k].lbl}</div></div><div style="text-align:center"><i class="ti ${ai}" style="font-size:18px;color:${col}"></i><div style="font-size:10px;color:${col};font-weight:600">${diff>0?'+':''}${diff}</div></div><div><div style="font-size:15px;font-weight:600;text-align:center;color:${better?'#27500A':'#791F1F'}">${b[k]}</div>${bdg(better?'ok':'bad',better?'ดีขึ้น':'แย่ลง',better?'ti-circle-check':'ti-circle-x')}</div></div>`;}).join('')}</div>`;
   }else{
     c.innerHTML=`<div class="card"><div class="fg"><label class="flbl">วันที่ตรวจ</label><input type="date" id="bDate" value="${today()}"></div><div class="g2"><div class="fg"><label class="flbl">Cholesterol</label><input type="number" id="bCh" value="${b.chol}" step="1"></div><div class="fg"><label class="flbl">Triglyceride</label><input type="number" id="bTg" value="${b.tg}" step="1"></div></div><div class="g2"><div class="fg"><label class="flbl">HDL</label><input type="number" id="bHdl" value="${b.hdl}" step="1"></div><div class="fg"><label class="flbl">LDL</label><input type="number" id="bLdl" value="${b.ldl}" step="1"></div></div><div class="g2"><div class="fg"><label class="flbl">Uric Acid</label><input type="number" id="bUr" value="${b.uric}" step="0.1"></div><div class="fg"><label class="flbl">FBS (น้ำตาล)</label><input type="number" id="bFbs" value="${b.fbs}" step="1"></div></div><div class="fg"><label class="flbl">Creatinine</label><input type="number" id="bCr" value="${b.creatinine}" step="0.01"></div></div><button class="btn" onclick="saveBlood()"><i class="ti ti-device-floppy"></i>บันทึกผลเลือด</button>`;
   }
@@ -560,47 +516,254 @@ function saveBlood(){
   save();toast('✓ บันทึกผลเลือดเรียบร้อย!');S.bloodTab='compare';setTimeout(()=>renderBlood(),700);
 }
 
-// ══════════════════════════════════════════════════════════════════════════
-// FOOD
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+// FOOD (แยกรายวัน + ดูย้อนหลัง)
+// ══════════════════════════════════════════════════════════════
 function renderFood(){
-  const total=S.food.reduce((a,f)=>a+f.cal,0);
-  const meals=[{k:'เช้า',l:'อาหารเช้า',ic:'ti-sun'},{k:'กลางวัน',l:'อาหารกลางวัน',ic:'ti-sun-high'},{k:'เย็น',l:'อาหารเย็น',ic:'ti-moon'},{k:'ว่าง',l:'ของว่าง',ic:'ti-cookie'}];
-  document.getElementById('pg').innerHTML=`
-  <div class="card" style="margin-top:4px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div class="ctitle" style="margin-bottom:0"><i class="ti ti-salad" style="color:${G}"></i>แคลอรี่วันนี้</div><span style="font-size:17px;font-weight:700;color:${total<=2000?G:'#A32D2D'}">${total} <span style="font-size:11px;font-weight:400;color:#888">kcal</span></span></div><div style="height:9px;background:#f0f0f0;border-radius:5px;overflow:hidden;margin-bottom:4px"><div style="width:${Math.min(100,Math.round(total/2000*100))}%;height:100%;background:${total<=2000?G:'#A32D2D'};border-radius:5px"></div></div><div style="display:flex;justify-content:space-between;font-size:11px;color:#888"><span>${Math.min(100,Math.round(total/2000*100))}% ของ 2,000 kcal</span><span>เหลือ ${Math.max(0,2000-total)} kcal</span></div></div>
-  ${meals.map(m=>{const items=S.food.filter(f=>f.type===m.k);const mCal=items.reduce((a,f)=>a+f.cal,0);return`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><div class="ctitle" style="margin-bottom:0"><i class="ti ${m.ic}" style="color:${G}"></i>${m.l}</div><span style="font-size:13px;color:#888">${mCal} kcal</span></div>${items.map(f=>`<div class="fi"><div><div style="font-size:13px;font-weight:500">${f.name}</div><div style="font-size:11px;color:#999">${f.time}</div></div><div style="font-size:13px;font-weight:700;color:${G}">${f.cal} kcal</div></div>`).join('')}${items.length===0?'<div style="font-size:12px;color:#ccc;text-align:center;padding:6px">ยังไม่มีข้อมูล</div>':''}</div>`;}).join('')}
-  <div class="card"><div class="ctitle"><i class="ti ti-plus" style="color:${G}"></i>เพิ่มรายการอาหาร</div><div class="fg"><label class="flbl">ชื่ออาหาร</label><input type="text" id="fN" placeholder="เช่น ข้าวกล้อง + ไก่ต้ม"></div><div class="g2"><div class="fg"><label class="flbl">แคลอรี่ (kcal)</label><input type="number" id="fC" placeholder="300" step="10"></div><div class="fg"><label class="flbl">เวลา</label><input type="time" id="fT" value="12:00"></div></div><div class="fg"><label class="flbl">มื้อ</label><select id="fTy"><option>เช้า</option><option selected>กลางวัน</option><option>เย็น</option><option>ว่าง</option></select></div></div>
-  <button class="btn" onclick="addFood()"><i class="ti ti-plus"></i>เพิ่มรายการ</button>`;
-}
-function addFood(){const n=document.getElementById('fN').value;const cal=parseInt(document.getElementById('fC').value);if(!n||!cal){toast('⚠ กรุณากรอกชื่อและแคลอรี่',true);return;}S.food.push({name:n,cal,time:document.getElementById('fT').value,type:document.getElementById('fTy').value});save();toast('✓ เพิ่มรายการเรียบร้อย!');setTimeout(()=>renderFood(),600);}
+  const date=S.foodDate||today();
+  const foods=getFoodForDate(date);
+  const total=foods.reduce((a,f)=>a+f.cal,0);
+  const calGoal=S.goals.calGoal||2000;
+  const meals=[{k:'เช้า',l:'อาหารเช้า',ic:'ti-sun'},{k:'กลางวัน',l:'กลางวัน',ic:'ti-sun-high'},{k:'เย็น',l:'อาหารเย็น',ic:'ti-moon'},{k:'ว่าง',l:'ของว่าง',ic:'ti-cookie'}];
 
-// ══════════════════════════════════════════════════════════════════════════
-// MORE (Progress, Habits, Goals, Reminder, Advice, Chart, Report)
-// ══════════════════════════════════════════════════════════════════════════
+  document.getElementById('pg').innerHTML=`
+  ${dateNavHTML(date,'foodPrev','foodNext')}
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div class="ctitle" style="margin-bottom:0"><i class="ti ti-salad" style="color:${G}"></i>แคลอรี่รวม</div>
+      <span style="font-size:18px;font-weight:700;color:${total<=calGoal?G:'#A32D2D'}">${total} <span style="font-size:11px;font-weight:400;color:#888">/ ${calGoal} kcal</span></span>
+    </div>
+    <div style="height:9px;background:#f0f0f0;border-radius:5px;overflow:hidden;margin-bottom:4px"><div style="width:${Math.min(100,Math.round(total/calGoal*100))}%;height:100%;background:${total<=calGoal?G:'#A32D2D'};border-radius:5px"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#888"><span>${Math.min(100,Math.round(total/calGoal*100))}% ของเป้าหมาย</span><span>เหลือ ${Math.max(0,calGoal-total)} kcal</span></div>
+  </div>
+
+  ${meals.map(m=>{
+    const items=foods.filter(f=>f.type===m.k);
+    const mCal=items.reduce((a,f)=>a+f.cal,0);
+    return`<div class="card">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <div class="ctitle" style="margin-bottom:0"><i class="ti ${m.ic}" style="color:${G}"></i>${m.l}</div>
+        <span style="font-size:13px;color:#888">${mCal} kcal</span>
+      </div>
+      ${items.map(f=>`<div class="fi">
+        <div><div style="font-size:13px;font-weight:500">${f.name}</div><div style="font-size:11px;color:#999">${f.time}</div></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:13px;font-weight:700;color:${G}">${f.cal} kcal</span>
+          <button onclick="delFood('${date}',${f.id})" style="background:none;border:none;cursor:pointer;color:#ccc;font-size:16px;padding:0"><i class="ti ti-trash"></i></button>
+        </div>
+      </div>`).join('')}
+      ${items.length===0?'<div style="font-size:12px;color:#ccc;text-align:center;padding:6px">ยังไม่มีข้อมูล</div>':''}
+    </div>`;
+  }).join('')}
+
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-plus" style="color:${G}"></i>เพิ่มรายการอาหาร</div>
+    <div class="fg"><label class="flbl">ชื่ออาหาร</label><input type="text" id="fN" placeholder="เช่น ข้าวกล้อง + ไก่ต้ม"></div>
+    <div class="g2">
+      <div class="fg"><label class="flbl">แคลอรี่ (kcal)</label><input type="number" id="fC" placeholder="300" step="10"></div>
+      <div class="fg"><label class="flbl">เวลา</label><input type="time" id="fT" value="${new Date().getHours().toString().padStart(2,'0')}:00"></div>
+    </div>
+    <div class="fg"><label class="flbl">มื้อ</label><select id="fTy"><option>เช้า</option><option>กลางวัน</option><option>เย็น</option><option>ว่าง</option></select></div>
+  </div>
+  <button class="btn" onclick="addFoodToday()"><i class="ti ti-plus"></i>เพิ่มรายการ</button>`;
+}
+function foodPrev(){S.foodDate=shiftDate(S.foodDate||today(),-1);renderFood();}
+function foodNext(){const n=shiftDate(S.foodDate||today(),1);if(n<=today()){S.foodDate=n;renderFood();}}
+function addFoodToday(){
+  const n=document.getElementById('fN').value;const cal=parseInt(document.getElementById('fC').value);
+  if(!n||!cal){toast('⚠ กรุณากรอกชื่อและแคลอรี่',true);return;}
+  addFoodEntry(S.foodDate||today(),{name:n,cal,time:document.getElementById('fT').value,type:document.getElementById('fTy').value});
+  toast('✓ เพิ่มรายการเรียบร้อย!');setTimeout(()=>renderFood(),500);
+}
+function delFood(date,id){delFoodEntry(date,id);renderFood();}
+
+// ══════════════════════════════════════════════════════════════
+// MORE — tabs
+// ══════════════════════════════════════════════════════════════
 function renderMore(){
   const t=S.moreTab;
-  document.getElementById('pg').innerHTML=`<div class="tabs" style="margin-top:4px"><button class="tab ${t==='progress'?'active':''}" onclick="switchMore('progress')">ความคืบหน้า</button><button class="tab ${t==='habits'?'active':''}" onclick="switchMore('habits')">กิจกรรม</button><button class="tab ${t==='goals'?'active':''}" onclick="switchMore('goals')">เป้าหมาย</button><button class="tab ${t==='reminder'?'active':''}" onclick="switchMore('reminder')">แจ้งเตือน</button><button class="tab ${t==='advice'?'active':''}" onclick="switchMore('advice')">คำแนะนำ</button><button class="tab ${t==='chart'?'active':''}" onclick="switchMore('chart')">กราฟ</button><button class="tab ${t==='report'?'active':''}" onclick="switchMore('report')">รายงาน</button></div><div id="mC"></div>`;
+  document.getElementById('pg').innerHTML=`
+  <div class="tabs" style="margin-top:4px">
+    <button class="tab ${t==='habit'?'active':''}" onclick="switchMore('habit')">กิจกรรม</button>
+    <button class="tab ${t==='activity'?'active':''}" onclick="switchMore('activity')">ก้าวเดิน/นอน</button>
+    <button class="tab ${t==='progress'?'active':''}" onclick="switchMore('progress')">ความคืบหน้า</button>
+    <button class="tab ${t==='goals'?'active':''}" onclick="switchMore('goals')">เป้าหมาย</button>
+    <button class="tab ${t==='advice'?'active':''}" onclick="switchMore('advice')">คำแนะนำ</button>
+    <button class="tab ${t==='reminder'?'active':''}" onclick="switchMore('reminder')">แจ้งเตือน</button>
+    <button class="tab ${t==='chart'?'active':''}" onclick="switchMore('chart')">กราฟ</button>
+    <button class="tab ${t==='report'?'active':''}" onclick="switchMore('report')">รายงาน</button>
+  </div>
+  <div id="mC"></div>`;
   renderMoreContent(t);
 }
 function switchMore(t){S.moreTab=t;renderMore();}
-function renderMoreContent(t){const c=document.getElementById('mC');if(!c)return;if(t==='progress')renderProgress(c);else if(t==='habits')renderHabits(c);else if(t==='goals')renderGoals(c);else if(t==='reminder')renderReminder(c);else if(t==='advice')renderAdvice(c);else if(t==='chart')renderChartPage(c);else if(t==='report')renderReport(c);}
+function renderMoreContent(t){
+  const c=document.getElementById('mC');if(!c)return;
+  if(t==='habit')renderHabits(c);
+  else if(t==='activity')renderActivity(c);
+  else if(t==='progress')renderProgress(c);
+  else if(t==='goals')renderGoals(c);
+  else if(t==='advice')renderAdvice(c);
+  else if(t==='reminder')renderReminder(c);
+  else if(t==='chart')renderChartPage(c);
+  else if(t==='report')renderReport(c);
+}
 
+// ── HABIT (แยกรายวัน + สถิติ) ────────────────────────────────
+function renderHabits(c){
+  const date=S.habitDate||today();
+  const habits=getHabits(date);
+  const done=habits.filter(h=>h.done).length;
+  const score=Math.round(done/habits.length*100);
+  const hist=habitScoreHistory(14);
+  const avg7=Math.round(hist.slice(-7).reduce((a,x)=>a+x.score,0)/7);
+  const avg14=Math.round(hist.reduce((a,x)=>a+x.score,0)/14);
+
+  c.innerHTML=`
+  ${dateNavHTML(date,'habitPrev','habitNext')}
+  <div class="card" style="display:flex;align-items:center;gap:14px">
+    <svg width="60" height="60" viewBox="0 0 60 60" role="img" aria-label="กิจกรรม ${done}/${habits.length}">
+      <circle cx="30" cy="30" r="25" fill="none" stroke="#f0f0f0" stroke-width="7"/>
+      <circle cx="30" cy="30" r="25" fill="none" stroke="${score>=70?G:'#854F0B'}" stroke-width="7"
+        stroke-dasharray="${(score/100*157.1).toFixed(1)} 157.1" stroke-linecap="round" transform="rotate(-90 30 30)"/>
+      <text x="30" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="${score>=70?G:'#854F0B'}">${score}%</text>
+    </svg>
+    <div style="flex:1">
+      <div style="font-size:15px;font-weight:600">${done}/${habits.length} กิจกรรม</div>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <div class="sc" style="flex:1;padding:7px 10px"><div class="slbl">เฉลี่ย 7 วัน</div><div style="font-size:16px;font-weight:700;color:${avg7>=70?G:'#854F0B'}">${avg7}%</div></div>
+        <div class="sc" style="flex:1;padding:7px 10px"><div class="slbl">เฉลี่ย 14 วัน</div><div style="font-size:16px;font-weight:700;color:${avg14>=70?G:'#854F0B'}">${avg14}%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    ${habits.map(h=>`<div class="hi">
+      <i class="ti ${h.icon}" style="font-size:19px;color:${G};width:24px;text-align:center"></i>
+      <span style="flex:1;font-size:13px;${h.done?'color:#bbb;text-decoration:line-through':''}">${h.fullText}</span>
+      <button class="hck ${h.done?'on':''}" onclick="toggleH('${date}',${h.id})">
+        ${h.done?'<i class="ti ti-check" style="font-size:13px"></i>':''}
+      </button>
+    </div>`).join('')}
+  </div>
+
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-chart-bar" style="color:${G}"></i>Habit Score 14 วันที่ผ่านมา</div>
+    <div class="cw-sm"><canvas id="hChart" role="img" aria-label="กราฟ Habit Score 14 วัน"></canvas></div>
+  </div>
+
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-calendar-stats" style="color:${G}"></i>ภาพรวม 14 วัน</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap">
+      ${hist.map(x=>{const col=x.score>=80?G:x.score>=50?'#854F0B':'#f0f0f0';return`<div title="${x.date}: ${x.score}%" style="width:calc(14.28% - 4px);aspect-ratio:1;border-radius:4px;background:${col};display:flex;align-items:center;justify-content:center;font-size:9px;color:${x.score>50?'white':'#bbb'}">${x.score>0?x.score:'0'}</div>`;}).join('')}
+    </div>
+    <div style="display:flex;gap:12px;margin-top:8px;font-size:11px;color:#888">
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:${G};display:inline-block"></span>≥80%</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:#854F0B;display:inline-block"></span>50–79%</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:#f0f0f0;display:inline-block"></span><50%</span>
+    </div>
+  </div>`;
+
+  setTimeout(()=>{
+    const ctx=document.getElementById('hChart');if(!ctx)return;
+    if(activeChart){activeChart.destroy();activeChart=null;}
+    activeChart=new Chart(ctx,{type:'bar',data:{labels:hist.map(x=>x.date.slice(5)),datasets:[{data:hist.map(x=>x.score),backgroundColor:hist.map(x=>x.score>=70?'rgba(26,107,60,.7)':'rgba(133,79,11,.5)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{min:0,max:100,ticks:{font:{size:10},callback:v=>v+'%'}}}}});
+  },80);
+}
+function habitPrev(){S.habitDate=shiftDate(S.habitDate||today(),-1);renderHabits(document.getElementById('mC'));}
+function habitNext(){const n=shiftDate(S.habitDate||today(),1);if(n<=today()){S.habitDate=n;renderHabits(document.getElementById('mC'));}}
+function toggleH(date,id){toggleHabitDate(date,id);renderHabits(document.getElementById('mC'));}
+
+// ── ACTIVITY (ก้าวเดิน/นอน แยกรายวัน + กราฟ) ────────────────
+function renderActivity(c){
+  const date=S.actDate||today();
+  const act=getActivity(date);
+  const hist=S.activityLogs.slice(-14).sort((a,b)=>a.date.localeCompare(b.date));
+  const avgSteps=hist.length?Math.round(hist.reduce((a,x)=>a+(x.steps||0),0)/hist.length):0;
+  const avgSleep=hist.length?(hist.reduce((a,x)=>a+(x.sleep||0),0)/hist.length).toFixed(1):0;
+  const slpQ=['','แย่','พอใช้','ดี','ดีมาก'];
+
+  c.innerHTML=`
+  ${dateNavHTML(date,'actPrev','actNext')}
+  <div class="g2">
+    <div class="sc"><div class="slbl"><i class="ti ti-walk"></i>ก้าวเดิน</div>
+      <div class="sval" style="font-size:18px">${(act.steps||0).toLocaleString()}</div>
+      ${bdg((act.steps||0)>=10000?'ok':(act.steps||0)>=7000?'warn':'bad',(act.steps||0)>=10000?'ถึงเป้า':`${Math.round((act.steps||0)/10000*100)}%`,(act.steps||0)>=10000?'ti-circle-check':'ti-target')}
+    </div>
+    <div class="sc"><div class="slbl"><i class="ti ti-moon"></i>การนอน</div>
+      <div class="sval" style="font-size:18px">${fmt(act.sleep||0)} <span class="sunit">ชม.</span></div>
+      ${bdg((act.sleep||0)>=7?'ok':'warn',slpQ[act.sleepQ||2],(act.sleep||0)>=7?'ti-circle-check':'ti-alert-triangle')}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-edit" style="color:${G}"></i>แก้ไขข้อมูลวันนี้</div>
+    <div class="g2">
+      <div class="fg"><label class="flbl">ก้าวเดิน</label><input type="number" id="aS" value="${act.steps||0}" step="100"></div>
+      <div class="fg"><label class="flbl">ชั่วโมงนอน</label><input type="number" id="aSl" value="${act.sleep||0}" step="0.5"></div>
+    </div>
+    <div class="fg"><label class="flbl">คุณภาพการนอน</label>
+      <select id="aSlQ"><option value="1">1 — แย่มาก</option><option value="2" ${(act.sleepQ||2)===2?'selected':''}>2 — พอใช้</option><option value="3" ${(act.sleepQ||2)===3?'selected':''}>3 — ดี</option><option value="4" ${(act.sleepQ||2)===4?'selected':''}>4 — ดีมาก</option></select>
+    </div>
+    <button class="btn" onclick="saveActivity('${date}')"><i class="ti ti-device-floppy"></i>บันทึก</button>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+      <div class="ctitle" style="margin-bottom:0"><i class="ti ti-walk" style="color:#185FA5"></i>กราฟก้าวเดิน 14 วัน</div>
+      <div class="sc" style="padding:5px 10px"><div class="slbl">เฉลี่ย</div><div style="font-size:13px;font-weight:700;color:#185FA5">${avgSteps.toLocaleString()}</div></div>
+    </div>
+    <div class="cw"><canvas id="stChart" role="img" aria-label="กราฟก้าวเดิน 14 วัน"></canvas></div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+      <div class="ctitle" style="margin-bottom:0"><i class="ti ti-moon" style="color:#534AB7"></i>กราฟการนอน 14 วัน</div>
+      <div class="sc" style="padding:5px 10px"><div class="slbl">เฉลี่ย</div><div style="font-size:13px;font-weight:700;color:#534AB7">${avgSleep} ชม.</div></div>
+    </div>
+    <div class="cw"><canvas id="slChart" role="img" aria-label="กราฟการนอน 14 วัน"></canvas></div>
+  </div>`;
+
+  setTimeout(()=>{
+    const labels=hist.map(x=>x.date.slice(5));
+    const stCtx=document.getElementById('stChart');
+    if(stCtx){
+      const stChart=new Chart(stCtx,{type:'bar',data:{labels,datasets:[{data:hist.map(x=>x.steps||0),backgroundColor:hist.map(x=>(x.steps||0)>=10000?'rgba(24,95,165,.8)':'rgba(24,95,165,.4)'),borderRadius:4},{type:'line',data:Array(hist.length).fill(10000),borderColor:'rgba(163,45,45,.5)',borderDash:[5,4],pointRadius:0,borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{ticks:{font:{size:10},callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v}}}}});
+    }
+    const slCtx=document.getElementById('slChart');
+    if(slCtx){
+      new Chart(slCtx,{type:'line',data:{labels,datasets:[{data:hist.map(x=>x.sleep||0),borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,.1)',tension:.3,fill:true,pointRadius:4,pointBackgroundColor:'#534AB7'},{type:'line',data:Array(hist.length).fill(7),borderColor:'rgba(26,107,60,.4)',borderDash:[5,4],pointRadius:0,borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{min:0,max:10,ticks:{font:{size:10},callback:v=>v+'ชม.'}}}}});
+    }
+  },80);
+}
+function actPrev(){S.actDate=shiftDate(S.actDate||today(),-1);renderActivity(document.getElementById('mC'));}
+function actNext(){const n=shiftDate(S.actDate||today(),1);if(n<=today()){S.actDate=n;renderActivity(document.getElementById('mC'));}}
+function saveActivity(date){
+  setActivity(date,{steps:parseFloat(document.getElementById('aS').value)||0,sleep:parseFloat(document.getElementById('aSl').value)||0,sleepQ:parseInt(document.getElementById('aSlQ').value)||2});
+  toast('✓ บันทึกเรียบร้อย!');setTimeout(()=>renderActivity(document.getElementById('mC')),500);
+}
+
+// ── PROGRESS ──────────────────────────────────────────────────
 function renderProgress(c){
-  const p=calcProgress();const f=S.logs[0];const l=last();
+  const p=calcProgress();const f=S.logs[0];const l=lastLog();
   c.innerHTML=`
   <div class="card"><div class="ctitle"><i class="ti ti-chart-pie" style="color:${G}"></i>ความคืบหน้าเป้าหมาย</div>
-  <div class="ring-wrap">${ring(p.wkPct,p.wkPct>=70?G:'#854F0B',84,8,'สัปดาห์นี้',`${p.done}/${p.total} ข้อ`)}${ring(p.monthPct,p.monthPct>=70?G:'#854F0B',84,8,'เดือนนี้','เฉลี่ยทุกด้าน')}${ring(p.day90Pct,G,84,8,'90 วัน','เป้าหลัก')}</div></div>
-  <div class="card"><div class="ctitle"><i class="ti ti-checkup-list" style="color:${G}"></i>Habit Score วันนี้</div><div class="hs-row">${S.habits.map(h=>ringHabit(h.text,h.done?100:0,h.done?G:'#ccc',56)).join('')}</div></div>
-  <div class="card"><div class="ctitle"><i class="ti ti-scale" style="color:${G}"></i>กราฟน้ำหนัก 90 วัน</div>
+  <div class="ring-wrap">${ring(p.wkPct,p.wkPct>=70?G:'#854F0B',84,8,'กิจกรรมวันนี้','')}${ring(p.monthPct,p.monthPct>=70?G:'#854F0B',84,8,'Habit 7 วัน','')}${ring(p.day90Pct,G,84,8,'น้ำหนัก+ความดัน','')}</div></div>
+
+  <div class="card"><div class="ctitle"><i class="ti ti-scale" style="color:${G}"></i>กราฟน้ำหนัก</div>
   <div class="leg"><span style="display:flex;align-items:center;gap:4px"><span class="ld" style="background:${G}"></span>น้ำหนักจริง</span><span style="display:flex;align-items:center;gap:4px"><span class="ld" style="background:#185FA5;opacity:.6"></span>เส้นเป้าหมาย</span></div>
-  <div class="cw"><canvas id="wChart" role="img" aria-label="กราฟน้ำหนัก">น้ำหนักลดจาก ${f.weight} เป็น ${l.weight} กก.</canvas></div>
-  <div style="margin-top:8px"><div style="display:flex;justify-content:space-between;font-size:12px;color:#666;margin-bottom:4px"><span>ความคืบหน้า</span><span style="font-weight:600;color:${G}">ลดไป ${p.wtLost} กก.</span></div><div class="pbar" style="height:10px"><div class="pfill" style="width:${p.wProgress}%;background:${G}"></div></div><div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-top:3px"><span>เริ่ม ${f.weight} กก.</span><span>เป้า ${S.goals.weight} กก.</span></div></div></div>
+  <div class="cw"><canvas id="wChart" role="img" aria-label="กราฟน้ำหนัก"></canvas></div>
+  <div style="margin-top:8px">${pr('ลดน้ำหนัก',p.wProgress,G,'80px')}
+  <div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-top:2px"><span>เริ่ม ${f.weight} กก.</span><span>ลด ${p.wtLost} กก. — เหลือ ${(l.weight-S.goals.weight).toFixed(1)} กก.</span></div></div></div>
+
   <div class="card"><div class="ctitle"><i class="ti ti-heart" style="color:#A32D2D"></i>กราฟความดันโลหิต</div>
-  <div class="leg"><span style="display:flex;align-items:center;gap:4px"><span class="ld" style="background:#A32D2D"></span>SYS (ตัวบน)</span><span style="display:flex;align-items:center;gap:4px"><span class="ld" style="background:#185FA5"></span>DIA (ตัวล่าง)</span></div>
-  <div class="cw"><canvas id="bpChart" role="img" aria-label="กราฟความดัน">ความดันลดจาก ${f.bpSys}/${f.bpDia} เป็น ${l.bpSys}/${l.bpDia} mmHg</canvas></div>
-  ${pr('ลดความดัน',p.bpProgress,p.bpProgress>=60?G:'#854F0B')}</div>
-  <div class="card"><div class="ctitle"><i class="ti ti-trending-up" style="color:${G}"></i>สรุปความเปลี่ยนแปลง 90 วัน</div>
-  <div class="g2">${[{lbl:'น้ำหนักลด',val:p.wtLost+' กก.',ic:'ti-trending-down',ok:p.wtLost>0},{lbl:'ความดันลด',val:p.bpDrop+' mmHg',ic:'ti-trending-down',ok:p.bpDrop>0},{lbl:'ก้าวเดินเพิ่ม',val:(p.stepUp>0?'+':'')+p.stepUp.toLocaleString(),ic:'ti-walk',ok:p.stepUp>0},{lbl:'BMI ปัจจุบัน',val:bmi(l.weight,l.height),ic:'ti-activity',ok:parseFloat(bmi(l.weight,l.height))<25}].map(x=>`<div class="sc"><div class="slbl"><i class="ti ${x.ic}"></i>${x.lbl}</div><div class="sval" style="color:${x.ok?G:'#A32D2D'}">${x.val}</div></div>`).join('')}</div></div>`;
+  <div class="leg"><span style="display:flex;align-items:center;gap:4px"><span class="ld" style="background:#A32D2D"></span>SYS</span><span style="display:flex;align-items:center;gap:4px"><span class="ld" style="background:#185FA5"></span>DIA</span></div>
+  <div class="cw"><canvas id="bpChart" role="img" aria-label="กราฟความดัน"></canvas></div>
+  ${pr('ลดความดัน',p.bpProgress,p.bpProgress>=60?G:'#854F0B','80px')}
+  <div style="font-size:10px;color:#999;margin-top:2px">เริ่ม ${f.bpSys} → ปัจจุบัน ${l.bpSys} mmHg (ลด ${p.bpDrop} mmHg)</div></div>
+
+  <div class="card"><div class="ctitle"><i class="ti ti-trending-up" style="color:${G}"></i>สรุป 90 วัน</div>
+  <div class="g2">${[{lbl:'น้ำหนักลด',val:p.wtLost+' กก.',ok:p.wtLost>0,ic:'ti-trending-down'},{lbl:'ความดันลด',val:p.bpDrop+' mmHg',ok:p.bpDrop>0,ic:'ti-trending-down'},{lbl:'ก้าวเดินเพิ่ม',val:(p.stepUp>0?'+':'')+p.stepUp.toLocaleString(),ok:p.stepUp>0,ic:'ti-walk'},{lbl:'BMI ปัจจุบัน',val:bmi(l.weight,l.height),ok:parseFloat(bmi(l.weight,l.height))<25,ic:'ti-activity'}].map(x=>`<div class="sc"><div class="slbl"><i class="ti ${x.ic}"></i>${x.lbl}</div><div class="sval" style="color:${x.ok?G:'#A32D2D'}">${x.val}</div></div>`).join('')}</div></div>`;
 
   setTimeout(()=>{
     const labels=S.logs.map(l=>l.date.slice(5));
@@ -608,25 +771,27 @@ function renderProgress(c){
     const wCtx=document.getElementById('wChart');
     if(wCtx)new Chart(wCtx,{type:'line',data:{labels,datasets:[{label:'จริง',data:S.logs.map(l=>l.weight),borderColor:G,backgroundColor:'rgba(26,107,60,.08)',tension:.3,fill:true,pointRadius:4,pointBackgroundColor:G},{label:'เป้า',data:goalLine,borderColor:'#185FA5',borderDash:[6,4],tension:.2,pointRadius:2,pointBackgroundColor:'#185FA5',borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{min:68,max:82,ticks:{font:{size:10},callback:v=>v+'กก.'}}}}});
     const bpCtx=document.getElementById('bpChart');
-    if(bpCtx)new Chart(bpCtx,{type:'line',data:{labels,datasets:[{label:'SYS',data:S.logs.map(l=>l.bpSys),borderColor:'#A32D2D',tension:.3,pointRadius:4,pointBackgroundColor:'#A32D2D'},{label:'DIA',data:S.logs.map(l=>l.bpDia),borderColor:'#185FA5',tension:.3,borderDash:[5,4],pointRadius:4,pointBackgroundColor:'#185FA5'},{type:'line',label:'เป้า SYS',data:Array(S.logs.length).fill(S.goals.bpSys),borderColor:'rgba(163,45,45,.3)',borderDash:[3,3],pointRadius:0,borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{min:70,max:155,ticks:{font:{size:10}}}}}});
+    if(bpCtx)new Chart(bpCtx,{type:'line',data:{labels,datasets:[{label:'SYS',data:S.logs.map(l=>l.bpSys),borderColor:'#A32D2D',tension:.3,pointRadius:4,pointBackgroundColor:'#A32D2D'},{label:'DIA',data:S.logs.map(l=>l.bpDia),borderColor:'#185FA5',tension:.3,borderDash:[5,4],pointRadius:4,pointBackgroundColor:'#185FA5'},{type:'line',data:Array(S.logs.length).fill(S.goals.bpSys),borderColor:'rgba(163,45,45,.3)',borderDash:[3,3],pointRadius:0,borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{min:70,max:155,ticks:{font:{size:10}}}}}});
   },80);
 }
 
-function renderHabits(c){
-  const done=S.habits.filter(h=>h.done).length;
-  c.innerHTML=`<div class="card" style="display:flex;align-items:center;gap:14px"><svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="24" fill="none" stroke="#f0f0f0" stroke-width="7"/><circle cx="28" cy="28" r="24" fill="none" stroke="${G}" stroke-width="7" stroke-dasharray="${Math.round((done/S.habits.length)*150.8)} 150.8" stroke-linecap="round" transform="rotate(-90 28 28)"/><text x="28" y="33" text-anchor="middle" font-size="13" font-weight="700" fill="${G}">${done}/${S.habits.length}</text></svg><div><div style="font-size:15px;font-weight:600">กิจกรรมประจำวัน</div><div style="font-size:12px;color:#888;margin-top:2px">${done} จาก ${S.habits.length} สำเร็จ</div><div style="margin-top:5px">${bdg(done>=5?'ok':done>=3?'warn':'bad',done>=5?'ดีมาก':done>=3?'พอใช้':'ต้องเพิ่ม',done>=5?'ti-circle-check':'ti-alert-triangle')}</div></div></div><div class="card">${S.habits.map(h=>`<div class="hi"><i class="ti ${h.icon}" style="font-size:19px;color:${G};width:24px;text-align:center"></i><span style="flex:1;font-size:13px;${h.done?'color:#bbb;text-decoration:line-through':''}">${h.fullText}</span><button class="hck ${h.done?'on':''}" onclick="toggleHabit(${h.id})">${h.done?'<i class="ti ti-check" style="font-size:13px"></i>':''}</button></div>`).join('')}</div>`;
-}
-function toggleHabit(id){const h=S.habits.find(x=>x.id===id);if(h)h.done=!h.done;save();renderHabits(document.getElementById('mC'));}
-
+// ── GOALS ─────────────────────────────────────────────────────
 function renderGoals(c){
-  const l=last();const b=blood();
-  const goals=[{lbl:'น้ำหนัก',cur:l.weight,goal:S.goals.weight,unit:'กก.',better:'lower',start:S.goals.startWeight},{lbl:'ความดัน SYS',cur:l.bpSys,goal:S.goals.bpSys,unit:'mmHg',better:'lower',start:143},{lbl:'Cholesterol',cur:b.chol,goal:S.goals.chol,unit:'mg/dL',better:'lower',start:228},{lbl:'LDL',cur:b.ldl,goal:S.goals.ldl,unit:'mg/dL',better:'lower',start:148},{lbl:'ก้าวเดิน/วัน',cur:l.steps||0,goal:S.goals.steps,unit:'ก้าว',better:'higher',start:5200}];
+  const l=lastLog();const b=blood();
+  const goals=[{lbl:'น้ำหนัก',cur:l.weight,goal:S.goals.weight,unit:'กก.',better:'lower',start:S.goals.startWeight},{lbl:'ความดัน SYS',cur:l.bpSys,goal:S.goals.bpSys,unit:'mmHg',better:'lower',start:143},{lbl:'Cholesterol',cur:b.chol,goal:S.goals.chol,unit:'mg/dL',better:'lower',start:228},{lbl:'LDL',cur:b.ldl,goal:S.goals.ldl,unit:'mg/dL',better:'lower',start:148},{lbl:'ก้าวเดิน/วัน',cur:getActivity(today()).steps||0,goal:S.goals.steps,unit:'ก้าว',better:'higher',start:5200}];
   c.innerHTML=`<div class="card"><div class="ctitle"><i class="ti ti-target" style="color:${G}"></i>เป้าหมายสุขภาพ</div>${goals.map(g=>{const range=g.better==='lower'?g.start-g.goal:g.goal-g.start;const done=g.better==='lower'?g.start-g.cur:g.cur-g.start;const pct=Math.min(100,Math.max(0,Math.round((done/range)*100)));const col=pct>=100?G:pct>=60?'#3B6D11':'#854F0B';return`<div class="gr"><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:13px;font-weight:600">${g.lbl}</span><span style="font-size:12px;color:${col};font-weight:600">${pct}%</span></div><div style="font-size:11px;color:#999;margin-bottom:4px">${g.cur.toLocaleString()} ${g.unit} → เป้า ${g.goal.toLocaleString()} ${g.unit}</div><div class="pbar"><div class="pfill" style="width:${pct}%;background:${col}"></div></div></div><div style="margin-left:10px;flex-shrink:0">${bdg(pct>=100?'ok':'warn',pct>=100?'สำเร็จ':`เหลือ ${Math.abs(g.better==='lower'?g.cur-g.goal:g.goal-g.cur).toFixed(0)}`,pct>=100?'ti-circle-check':'ti-target')}</div></div>`;}).join('')}</div>
-  <div class="card"><div class="ctitle"><i class="ti ti-edit" style="color:${G}"></i>แก้ไขเป้าหมาย</div><div class="g2"><div class="fg"><label class="flbl">น้ำหนักเป้า (กก.)</label><input type="number" id="gW" value="${S.goals.weight}" step="0.5"></div><div class="fg"><label class="flbl">ก้าวเดิน/วัน</label><input type="number" id="gSt" value="${S.goals.steps}" step="500"></div></div><div class="g2"><div class="fg"><label class="flbl">ความดัน SYS</label><input type="number" id="gSys" value="${S.goals.bpSys}" step="1"></div><div class="fg"><label class="flbl">Cholesterol</label><input type="number" id="gChol" value="${S.goals.chol}" step="5"></div></div></div>
+  <div class="card"><div class="ctitle"><i class="ti ti-edit" style="color:${G}"></i>แก้ไขเป้าหมาย</div><div class="g2"><div class="fg"><label class="flbl">น้ำหนักเป้า (กก.)</label><input type="number" id="gW" value="${S.goals.weight}" step="0.5"></div><div class="fg"><label class="flbl">แคลอรี่ต่อวัน</label><input type="number" id="gCal" value="${S.goals.calGoal||2000}" step="50"></div></div><div class="g2"><div class="fg"><label class="flbl">ความดัน SYS</label><input type="number" id="gSys" value="${S.goals.bpSys}" step="1"></div><div class="fg"><label class="flbl">ก้าวเดิน/วัน</label><input type="number" id="gSt" value="${S.goals.steps}" step="500"></div></div></div>
   <button class="btn" onclick="saveGoals()"><i class="ti ti-device-floppy"></i>บันทึกเป้าหมาย</button>`;
 }
-function saveGoals(){S.goals.weight=parseFloat(document.getElementById('gW').value)||S.goals.weight;S.goals.steps=parseFloat(document.getElementById('gSt').value)||S.goals.steps;S.goals.bpSys=parseFloat(document.getElementById('gSys').value)||S.goals.bpSys;S.goals.chol=parseFloat(document.getElementById('gChol').value)||S.goals.chol;save();toast('✓ บันทึกเป้าหมายเรียบร้อย!');setTimeout(()=>renderGoals(document.getElementById('mC')),600);}
+function saveGoals(){S.goals.weight=parseFloat(document.getElementById('gW').value)||S.goals.weight;S.goals.calGoal=parseFloat(document.getElementById('gCal').value)||2000;S.goals.bpSys=parseFloat(document.getElementById('gSys').value)||S.goals.bpSys;S.goals.steps=parseFloat(document.getElementById('gSt').value)||S.goals.steps;save();toast('✓ บันทึกเป้าหมายเรียบร้อย!');setTimeout(()=>renderGoals(document.getElementById('mC')),600);}
 
+// ── ADVICE ────────────────────────────────────────────────────
+function renderAdvice(c){
+  c.innerHTML=`<div class="card"><div class="ctitle"><i class="ti ti-bulb" style="color:#BA7517"></i>คำแนะนำตามค่าเลือดจริง</div>${genAdvice().map(a=>`<div class="ai"><i class="ti ${a.ic}" style="font-size:19px;color:${a.cls==='ok'?G:a.cls==='warn'?'#854F0B':'#A32D2D'};flex-shrink:0;width:22px;margin-top:1px"></i><div><div style="font-size:11px;font-weight:600;color:#888;margin-bottom:1px">${a.cat}</div><div style="font-size:13px;line-height:1.4">${a.txt}</div></div></div>`).join('')}</div>
+  <div class="card"><div class="ctitle"><i class="ti ti-dumbbell" style="color:${G}"></i>แผนออกกำลังกาย</div>${[{day:'จ/พ/ศ',act:'Cardio 30–45 นาที — เดิน วิ่ง ว่ายน้ำ',ic:'ti-run'},{day:'อ/พฤ',act:'Resistance Training — Yoga ยืดเหยียด',ic:'ti-barbell'},{day:'ส',act:'กิจกรรมกลางแจ้ง เดินสวน ปั่นจักรยาน',ic:'ti-mountain'},{day:'อา',act:'พักฟื้น — Stretch Meditation',ic:'ti-yoga'}].map(p=>`<div class="ai"><i class="ti ${p.ic}" style="font-size:18px;color:${G};width:22px;flex-shrink:0"></i><div><div style="font-size:11px;font-weight:600;color:#888">${p.day}</div><div style="font-size:13px">${p.act}</div></div></div>`).join('')}</div>`;
+}
+
+// ── REMINDER ──────────────────────────────────────────────────
 function renderReminder(c){
   c.innerHTML=`<div class="card"><div class="ctitle"><i class="ti ti-bell" style="color:${G}"></i>การแจ้งเตือน</div>${S.reminders.map(r=>`<div class="ri"><i class="ti ${r.icon}" style="font-size:20px;color:${r.on?G:'#ccc'};width:24px"></i><div style="flex:1"><div style="font-size:13px;font-weight:500">${r.text}</div><div style="font-size:11px;color:#999">${r.time} น.</div></div><button class="tog ${r.on?'on':'off'}" onclick="toggleRem(${r.id})"></button></div>`).join('')}</div>
   <div class="card"><div class="ctitle"><i class="ti ti-plus" style="color:${G}"></i>เพิ่มการแจ้งเตือน</div><div class="fg"><label class="flbl">ข้อความ</label><input type="text" id="rT" placeholder="เช่น กินยาเย็น"></div><div class="g2"><div class="fg"><label class="flbl">เวลา</label><input type="time" id="rTm" value="12:00"></div><div class="fg"><label class="flbl">ไอคอน</label><select id="rI"><option value="ti-pill">ยา</option><option value="ti-droplet">น้ำ</option><option value="ti-heart">ความดัน</option><option value="ti-run">ออกกำลังกาย</option><option value="ti-moon">นอน</option></select></div></div></div>
@@ -635,42 +800,134 @@ function renderReminder(c){
 function toggleRem(id){const r=S.reminders.find(x=>x.id===id);if(r)r.on=!r.on;save();renderReminder(document.getElementById('mC'));}
 function addReminder(){const t=document.getElementById('rT').value;if(!t){toast('⚠ กรุณากรอกข้อความ',true);return;}S.reminders.push({id:Date.now(),icon:document.getElementById('rI').value,text:t,time:document.getElementById('rTm').value,on:true});save();toast('✓ เพิ่มการแจ้งเตือนเรียบร้อย!');setTimeout(()=>renderReminder(document.getElementById('mC')),600);}
 
-function renderAdvice(c){
-  c.innerHTML=`<div class="card"><div class="ctitle"><i class="ti ti-bulb" style="color:#BA7517"></i>คำแนะนำตามค่าเลือดจริง</div>${genAdvice().map(a=>`<div class="ai"><i class="ti ${a.ic}" style="font-size:19px;color:${a.cls==='ok'?G:a.cls==='warn'?'#854F0B':'#A32D2D'};flex-shrink:0;width:22px;margin-top:1px"></i><div><div style="font-size:11px;font-weight:600;color:#888;margin-bottom:1px">${a.cat}</div><div style="font-size:13px;line-height:1.4">${a.txt}</div></div></div>`).join('')}</div>
-  <div class="card"><div class="ctitle"><i class="ti ti-dumbbell" style="color:${G}"></i>แผนออกกำลังกาย</div>${[{day:'จ / พ / ศ',act:'Cardio 30–45 นาที — เดิน วิ่ง ว่ายน้ำ',ic:'ti-run'},{day:'อ / พฤ',act:'Resistance Training — ยกน้ำหนักเบา หรือ Yoga',ic:'ti-barbell'},{day:'ส',act:'กิจกรรมกลางแจ้ง — เดินสวน ปั่นจักรยาน',ic:'ti-mountain'},{day:'อา',act:'พักฟื้น — ยืดเหยียด Stretch',ic:'ti-yoga'}].map(p=>`<div class="ai"><i class="ti ${p.ic}" style="font-size:18px;color:${G};width:22px;flex-shrink:0"></i><div><div style="font-size:11px;font-weight:600;color:#888">${p.day}</div><div style="font-size:13px">${p.act}</div></div></div>`).join('')}</div>`;
-}
-
+// ── CHART ─────────────────────────────────────────────────────
 function renderChartPage(c){
   const t=S.chartTab;
-  c.innerHTML=`<div class="tabs"><button class="tab ${t==='weight'?'active':''}" onclick="switchChart('weight')">น้ำหนัก</button><button class="tab ${t==='bp'?'active':''}" onclick="switchChart('bp')">ความดัน</button><button class="tab ${t==='steps'?'active':''}" onclick="switchChart('steps')">ก้าวเดิน</button><button class="tab ${t==='sleep'?'active':''}" onclick="switchChart('sleep')">การนอน</button></div><div class="card" style="padding:10px"><div class="cw"><canvas id="tC" role="img" aria-label="กราฟแนวโน้ม"></canvas></div></div>`;
+  c.innerHTML=`<div class="tabs"><button class="tab ${t==='weight'?'active':''}" onclick="switchChart('weight')">น้ำหนัก</button><button class="tab ${t==='bp'?'active':''}" onclick="switchChart('bp')">ความดัน</button><button class="tab ${t==='steps'?'active':''}" onclick="switchChart('steps')">ก้าวเดิน</button><button class="tab ${t==='sleep'?'active':''}" onclick="switchChart('sleep')">การนอน</button><button class="tab ${t==='habit'?'active':''}" onclick="switchChart('habit')">Habit</button></div><div class="card" style="padding:10px"><div class="cw"><canvas id="tC"></canvas></div></div>`;
   setTimeout(()=>drawChart(t),80);
 }
 function switchChart(t){S.chartTab=t;renderChartPage(document.getElementById('mC'));}
 function drawChart(tab){
   const canvas=document.getElementById('tC');if(!canvas)return;
   if(activeChart){activeChart.destroy();activeChart=null;}
-  const labels=S.logs.map(l=>l.date.slice(5));
-  let ds=[];
-  if(tab==='weight')ds=[{label:'น้ำหนัก',data:S.logs.map(l=>l.weight),borderColor:G,backgroundColor:'rgba(26,107,60,.1)',tension:.3,fill:true,pointRadius:4,pointBackgroundColor:G}];
-  else if(tab==='bp')ds=[{label:'SYS',data:S.logs.map(l=>l.bpSys),borderColor:'#A32D2D',tension:.3,pointRadius:4,pointBackgroundColor:'#A32D2D'},{label:'DIA',data:S.logs.map(l=>l.bpDia),borderColor:'#185FA5',tension:.3,borderDash:[5,4],pointRadius:4,pointBackgroundColor:'#185FA5'}];
-  else if(tab==='steps')ds=[{label:'ก้าวเดิน',data:S.logs.map(l=>l.steps||0),borderColor:'#185FA5',backgroundColor:'rgba(24,95,165,.1)',tension:.3,fill:true,pointRadius:4,pointBackgroundColor:'#185FA5'}];
-  else ds=[{label:'ชั่วโมงนอน',data:S.logs.map(l=>l.sleep||0),borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,.1)',tension:.3,fill:true,pointRadius:4,pointBackgroundColor:'#534AB7'}];
-  activeChart=new Chart(canvas,{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:tab==='bp',labels:{font:{size:10},boxWidth:10}}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{ticks:{font:{size:10}}}}}});
+  if(tab==='weight'||tab==='bp'){
+    const labels=S.logs.map(l=>l.date.slice(5));let ds=[];
+    if(tab==='weight')ds=[{label:'น้ำหนัก',data:S.logs.map(l=>l.weight),borderColor:G,backgroundColor:'rgba(26,107,60,.1)',tension:.3,fill:true,pointRadius:4,pointBackgroundColor:G}];
+    else ds=[{label:'SYS',data:S.logs.map(l=>l.bpSys),borderColor:'#A32D2D',tension:.3,pointRadius:4,pointBackgroundColor:'#A32D2D'},{label:'DIA',data:S.logs.map(l=>l.bpDia),borderColor:'#185FA5',tension:.3,borderDash:[5,4],pointRadius:4,pointBackgroundColor:'#185FA5'}];
+    activeChart=new Chart(canvas,{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:tab==='bp',labels:{font:{size:10},boxWidth:10}}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{ticks:{font:{size:10}}}}}});
+  } else if(tab==='steps'||tab==='sleep'){
+    const hist=S.activityLogs.slice(-30).sort((a,b)=>a.date.localeCompare(b.date));
+    const labels=hist.map(x=>x.date.slice(5));
+    let ds=[];
+    if(tab==='steps')ds=[{label:'ก้าวเดิน',data:hist.map(x=>x.steps||0),borderColor:'#185FA5',backgroundColor:'rgba(24,95,165,.1)',tension:.3,fill:true,pointRadius:3,pointBackgroundColor:'#185FA5'}];
+    else ds=[{label:'ชม.นอน',data:hist.map(x=>x.sleep||0),borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,.1)',tension:.3,fill:true,pointRadius:3,pointBackgroundColor:'#534AB7'}];
+    activeChart=new Chart(canvas,{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{ticks:{font:{size:10}}}}}});
+  } else {
+    const hist=habitScoreHistory(30);
+    const labels=hist.map(x=>x.date.slice(5));
+    activeChart=new Chart(canvas,{type:'bar',data:{labels,datasets:[{data:hist.map(x=>x.score),backgroundColor:hist.map(x=>x.score>=70?'rgba(26,107,60,.7)':'rgba(133,79,11,.5)'),borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:45}},y:{min:0,max:100,ticks:{font:{size:10},callback:v=>v+'%'}}}}});
+  }
 }
 
+// ── REPORT ────────────────────────────────────────────────────
 function renderReport(c){
-  const l=last();const b=blood();const sc=calcScores();const bioAge=calcBioAge();
+  const l=lastLog();const b=blood();const sc=calcScores();const bioAge=calcBioAge();
   const now=new Date();const mo=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-  const sA=Math.round(S.logs.reduce((a,x)=>a+(x.steps||0),0)/S.logs.length);
-  const slA=(S.logs.reduce((a,x)=>a+(x.sleep||0),0)/S.logs.length).toFixed(1);
+  const actH=S.activityLogs.slice(-30);
+  const sA=actH.length?Math.round(actH.reduce((a,x)=>a+(x.steps||0),0)/actH.length):0;
+  const slA=actH.length?(actH.reduce((a,x)=>a+(x.sleep||0),0)/actH.length).toFixed(1):0;
   const p=calcProgress();const warns=genAdvice().filter(a=>a.cls!=='ok');
   const pName=S.profile.name||'ไม่ระบุ';const pAge=S.profile.age||'ไม่ระบุ';
-  c.innerHTML=`<div class="card"><div class="ctitle"><i class="ti ti-file-description" style="color:${G}"></i>รายงานสรุปสุขภาพ</div><div style="font-size:12px;color:#888;margin-bottom:10px">${now.getDate()} ${mo[now.getMonth()]} ${now.getFullYear()+543} — สำหรับนำให้แพทย์</div><div style="background:#f8fbf8;border-radius:8px;padding:12px;margin-bottom:12px"><div style="font-size:12px;font-weight:600;color:${G};margin-bottom:8px">${pName} | อายุ ${pAge} ปี | Biological Age ${bioAge} ปี</div><table style="width:100%;font-size:12px;border-collapse:collapse">${[['น้ำหนัก / BMI',`${fmt(l.weight)} กก. / ${bmi(l.weight,l.height)}`],['ลดน้ำหนัก',`${p.wtLost} กก.`],['รอบเอว',`${l.waist} ซม.`],['ความดัน',`${l.bpSys}/${l.bpDia} mmHg`],['Cholesterol/LDL',`${b.chol}/${b.ldl} mg/dL`],['HDL/Triglyceride',`${b.hdl}/${b.tg} mg/dL`],['Uric Acid/FBS',`${b.uric}/${b.fbs} mg/dL`],['ก้าวเดินเฉลี่ย',`${sA.toLocaleString()} ก้าว/วัน`],['การนอนเฉลี่ย',`${slA} ชม./คืน`],['Health Score',`${sc.health}/100 — ${gH(sc.health).g}`]].map(([k,v])=>`<tr style="border-bottom:1px solid #f5f5f5"><td style="padding:4px 0;color:#666">${k}</td><td style="text-align:right;font-weight:600;padding:4px 0">${v}</td></tr>`).join('')}</table></div>${warns.length>0?`<div style="font-size:12px;font-weight:600;color:#A32D2D;margin-bottom:8px">ประเด็นที่ควรปรึกษาแพทย์:</div>${warns.map(a=>`<div style="display:flex;gap:7px;margin-bottom:6px"><i class="ti ti-alert-triangle" style="font-size:15px;color:#854F0B;flex-shrink:0;margin-top:1px"></i><div style="font-size:12px;line-height:1.4">${a.txt}</div></div>`).join('')}`:`<div style="text-align:center;color:${G};font-size:13px;padding:8px"><i class="ti ti-circle-check" style="font-size:20px;display:block;margin-bottom:4px"></i>ค่าสุขภาพทุกด้านอยู่ในเกณฑ์ดี</div>`}</div><button class="btn" onclick="window.print()"><i class="ti ti-printer"></i>พิมพ์รายงาน</button>`;
+  c.innerHTML=`<div class="card"><div class="ctitle"><i class="ti ti-file-description" style="color:${G}"></i>รายงานสรุปสุขภาพ</div><div style="font-size:12px;color:#888;margin-bottom:10px">${now.getDate()} ${mo[now.getMonth()]} ${now.getFullYear()+543}</div><div style="background:#f8fbf8;border-radius:8px;padding:12px;margin-bottom:12px"><div style="font-size:12px;font-weight:600;color:${G};margin-bottom:8px">${pName} | อายุ ${pAge} ปี | Biological Age ${bioAge} ปี</div><table style="width:100%;font-size:12px;border-collapse:collapse">${[['น้ำหนัก / BMI',`${fmt(l.weight)} กก. / ${bmi(l.weight,l.height)}`],['ลดน้ำหนัก',`${p.wtLost} กก.`],['รอบเอว',`${l.waist} ซม.`],['ความดัน',`${l.bpSys}/${l.bpDia} mmHg`],['Cholesterol/LDL',`${b.chol}/${b.ldl} mg/dL`],['HDL/TG',`${b.hdl}/${b.tg} mg/dL`],['Uric/FBS',`${b.uric}/${b.fbs} mg/dL`],['ก้าวเดินเฉลี่ย',`${sA.toLocaleString()} ก้าว/วัน`],['การนอนเฉลี่ย',`${slA} ชม./คืน`],['Health Score',`${sc.health}/100 — ${gH(sc.health).g}`]].map(([k,v])=>`<tr style="border-bottom:1px solid #f5f5f5"><td style="padding:4px 0;color:#666">${k}</td><td style="text-align:right;font-weight:600;padding:4px 0">${v}</td></tr>`).join('')}</table></div>${warns.length>0?`<div style="font-size:12px;font-weight:600;color:#A32D2D;margin-bottom:8px">ประเด็นที่ควรปรึกษาแพทย์:</div>${warns.map(a=>`<div style="display:flex;gap:7px;margin-bottom:6px"><i class="ti ti-alert-triangle" style="font-size:15px;color:#854F0B;flex-shrink:0;margin-top:1px"></i><div style="font-size:12px;line-height:1.4">${a.txt}</div></div>`).join('')}`:`<div style="text-align:center;color:${G};font-size:13px;padding:8px"><i class="ti ti-circle-check" style="font-size:20px;display:block;margin-bottom:4px"></i>ค่าสุขภาพทุกด้านอยู่ในเกณฑ์ดี</div>`}</div><button class="btn" onclick="window.print()"><i class="ti ti-printer"></i>พิมพ์รายงาน</button>`;
 }
 
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+// SETTINGS
+// ══════════════════════════════════════════════════════════════
+function renderSettings(){
+  const p=S.profile;
+  const dataSize=(new Blob([JSON.stringify(S)]).size/1024).toFixed(1);
+  document.getElementById('pg').innerHTML=`
+  <div class="card" style="margin-top:4px;text-align:center">
+    <div class="avatar">${p.name?initials(p.name):'?'}</div>
+    <div style="font-size:18px;font-weight:700">${p.name||'ยังไม่ได้ตั้งชื่อ'}</div>
+    <div style="font-size:13px;color:#888;margin-top:3px">${p.age?'อายุ '+p.age+' ปี':''} ${p.gender?'· '+p.gender:''}</div>
+    <button class="btn" style="max-width:200px;margin:12px auto 0" onclick="openProfileModal()"><i class="ti ti-edit"></i>แก้ไขข้อมูลส่วนตัว</button>
+  </div>
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-stethoscope" style="color:${G}"></i>ข้อมูลสุขภาพ</div>
+    ${[{lbl:'โรคประจำตัว',val:p.congenital||'—',ic:'ti-heart-plus'},{lbl:'ยาที่ใช้ประจำ',val:p.medications||'—',ic:'ti-pill'},{lbl:'แพทย์ประจำ',val:p.doctor||'—',ic:'ti-user-heart'},{lbl:'โรงพยาบาล',val:p.hospital||'—',ic:'ti-building-hospital'},{lbl:'เบอร์ฉุกเฉิน',val:p.emergency||'—',ic:'ti-phone-call'}].map(x=>`<div class="storage-row"><div class="storage-icon" style="background:#f5f7f5"><i class="ti ${x.ic}" style="color:${G}"></i></div><div><div style="font-size:11px;color:#888;margin-bottom:2px">${x.lbl}</div><div style="font-size:13px;font-weight:500">${x.val}</div></div></div>`).join('')}
+  </div>
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-database" style="color:${G}"></i>การเก็บข้อมูล</div>
+    <div class="storage-row"><div class="storage-icon" style="background:#EAF3DE"><i class="ti ti-device-mobile" style="color:${G}"></i></div><div><div style="font-size:13px;font-weight:600;color:${G}">localStorage ในมือถือของคุณ</div><div style="font-size:12px;color:#888;margin-top:2px">ข้อมูลทั้งหมดเก็บในเบราว์เซอร์บนเครื่องของคุณ ไม่มีการส่งออกไปที่ใดทั้งสิ้น</div></div></div>
+    <div class="storage-row"><div class="storage-icon" style="background:#E6F1FB"><i class="ti ti-lock" style="color:#185FA5"></i></div><div><div style="font-size:13px;font-weight:600;color:#185FA5">ปลอดภัย 100%</div><div style="font-size:12px;color:#888;margin-top:2px">ไม่มีบัญชี ไม่มีคลาวด์ ไม่มีใครเข้าถึงข้อมูลของคุณได้</div></div></div>
+    <div class="storage-row"><div class="storage-icon" style="background:#FAEEDA"><i class="ti ti-alert-triangle" style="color:#854F0B"></i></div><div><div style="font-size:13px;font-weight:600;color:#854F0B">ข้อควรระวัง</div><div style="font-size:12px;color:#888;margin-top:2px">ถ้า Clear Browser Data ข้อมูลจะหาย — Export สำรองไว้เสมอ</div></div></div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f5f5f5"><div style="font-size:22px;font-weight:700;color:${G}">${dataSize} KB <span style="font-size:12px;font-weight:400;color:#888">ขนาดข้อมูลปัจจุบัน</span></div><div style="font-size:11px;color:#888;margin-top:2px">บันทึกสุขภาพ ${S.logs.length} ครั้ง · ผลเลือด ${S.bloodHistory.length} ครั้ง · Habit ${Object.keys(S.habitLogs).length} วัน</div></div>
+  </div>
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-refresh" style="color:${G}"></i>สำรองและกู้คืนข้อมูล</div>
+    <p style="font-size:13px;color:#666;margin-bottom:12px;line-height:1.6">แนะนำ Export ข้อมูลสำรองทุก 1–2 เดือน</p>
+    <button class="btn" onclick="exportData()"><i class="ti ti-download"></i>Export ข้อมูล (ดาวน์โหลด JSON)</button>
+    <button class="btn btn-o" style="margin-top:8px" onclick="document.getElementById('importFile').click()"><i class="ti ti-upload"></i>Import ข้อมูล (นำเข้า JSON)</button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+  </div>
+  <div class="card">
+    <div class="ctitle"><i class="ti ti-trash" style="color:var(--rd)"></i>ล้างข้อมูลทั้งหมด</div>
+    <button class="btn btn-r" onclick="confirmReset()"><i class="ti ti-trash"></i>ล้างข้อมูลและเริ่มใหม่</button>
+  </div>`;
+}
+
+function openProfileModal(){
+  const p=S.profile;
+  const m=document.createElement('div');m.className='modal-bg';m.id='profileModal';
+  m.innerHTML=`<div class="modal"><div class="modal-title">แก้ไขข้อมูลส่วนตัว<button onclick="closeModal()" style="background:none;border:none;cursor:pointer;font-size:22px;color:#888;padding:0"><i class="ti ti-x"></i></button></div>
+  <div class="sec">ข้อมูลทั่วไป</div>
+  <div class="fg"><label class="flbl">ชื่อ-นามสกุล</label><input type="text" id="pName" value="${p.name||''}" placeholder="เช่น วิโรจน์ ใจดี"></div>
+  <div class="g2"><div class="fg"><label class="flbl">อายุ (ปี)</label><input type="number" id="pAge" value="${p.age||''}" placeholder="50" min="1" max="120"></div><div class="fg"><label class="flbl">เพศ</label><select id="pGender"><option value="">-- เลือก --</option><option value="ชาย" ${p.gender==='ชาย'?'selected':''}>ชาย</option><option value="หญิง" ${p.gender==='หญิง'?'selected':''}>หญิง</option></select></div></div>
+  <div class="g2"><div class="fg"><label class="flbl">ส่วนสูง (ซม.)</label><input type="number" id="pH" value="${p.height||173}" step="1"></div><div class="fg"><label class="flbl">หมู่เลือด</label><select id="pBl"><option value="">-- เลือก --</option>${['A+','A-','B+','B-','AB+','AB-','O+','O-'].map(x=>`<option value="${x}" ${p.bloodType===x?'selected':''}>${x}</option>`).join('')}</select></div></div>
+  <div class="sec">ข้อมูลทางการแพทย์</div>
+  <div class="fg"><label class="flbl">โรคประจำตัว</label><input type="text" id="pCon" value="${p.congenital||''}" placeholder="เช่น ความดันสูง เบาหวาน"></div>
+  <div class="fg"><label class="flbl">ยาที่ใช้ประจำ</label><input type="text" id="pMed" value="${p.medications||''}" placeholder="เช่น Amlodipine 5mg"></div>
+  <div class="fg"><label class="flbl">ชื่อแพทย์ประจำ</label><input type="text" id="pDoc" value="${p.doctor||''}" placeholder="นพ.สมชาย ใจดี"></div>
+  <div class="fg"><label class="flbl">โรงพยาบาล / คลินิก</label><input type="text" id="pHos" value="${p.hospital||''}" placeholder="รพ.กรุงเทพ"></div>
+  <div class="fg"><label class="flbl">เบอร์โทรฉุกเฉิน</label><input type="tel" id="pEm" value="${p.emergency||''}" placeholder="081-xxx-xxxx"></div>
+  <button class="btn" onclick="saveProfile()"><i class="ti ti-device-floppy"></i>บันทึกข้อมูลส่วนตัว</button>
+  <div style="height:20px"></div></div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)closeModal();});
+}
+function closeModal(){const m=document.getElementById('profileModal');if(m)m.remove();}
+function saveProfile(){
+  Object.assign(S.profile,{name:document.getElementById('pName').value.trim(),age:document.getElementById('pAge').value,gender:document.getElementById('pGender').value,height:parseFloat(document.getElementById('pH').value)||173,bloodType:document.getElementById('pBl').value,congenital:document.getElementById('pCon').value.trim(),medications:document.getElementById('pMed').value.trim(),doctor:document.getElementById('pDoc').value.trim(),hospital:document.getElementById('pHos').value.trim(),emergency:document.getElementById('pEm').value.trim()});
+  save();closeModal();updateHeader();toast('✓ บันทึกข้อมูลส่วนตัวเรียบร้อย!');
+  if(S.page==='settings')renderSettings();
+}
+function exportData(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`health-backup-${today()}.json`;a.click();URL.revokeObjectURL(a.href);
+  toast('✓ Export สำเร็จ!');
+}
+function importData(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(!d.logs||!d.bloodHistory){toast('⚠ ไฟล์ไม่ถูกต้อง',true);return;}Object.assign(S,d);save();updateHeader();toast('✓ Import สำเร็จ!');setTimeout(()=>renderSettings(),600);}catch(err){toast('⚠ ไฟล์ไม่ถูกต้อง',true);}};
+  reader.readAsText(file);e.target.value='';
+}
+function confirmReset(){
+  if(confirm('ต้องการล้างข้อมูลทั้งหมดจริงหรือไม่?\nไม่สามารถกู้คืนได้')){
+    localStorage.removeItem(SK);S=defState();save();updateHeader();toast('ล้างข้อมูลเรียบร้อย');setTimeout(()=>go('dash'),600);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
 // NAV + INIT
-// ══════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+function updateHeader(){
+  const n=S.profile.name;
+  document.getElementById('hdrName').textContent=n?`สวัสดี ${n}`:'Health & Longevity';
+}
 function go(p){
   S.page=p;
   ['dash','log','blood','food','more','settings'].forEach(id=>{const el=document.getElementById('nb-'+id);if(el)el.classList.toggle('active',id===p);});
@@ -683,19 +940,15 @@ function go(p){
   else if(p==='settings')renderSettings();
 }
 
-const d=new Date();
-const thD=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
-const thM=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-document.getElementById('hDate').textContent=`วัน${thD[d.getDay()]}ที่ ${d.getDate()} ${thM[d.getMonth()]} ${d.getFullYear()+543}`;
+// ── Date/time init ─────────────────────────────────────────────
+const _d=new Date();
+const thDays=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+const thMo=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+document.getElementById('hDate').textContent=`วัน${thDays[_d.getDay()]}ที่ ${_d.getDate()} ${thMo[_d.getMonth()]} ${_d.getFullYear()+543}`;
 
-// First run → open profile modal
-if(S.profile.firstRun||!S.profile.name){
-  S.profile.firstRun=false;save();
-  go('settings');
-  setTimeout(()=>openProfileModal(),400);
-}else{
-  updateHeader();go('dash');
-}
+// First run
+if(S.profile.firstRun||!S.profile.name){S.profile.firstRun=false;save();go('settings');setTimeout(()=>openProfileModal(),400);}
+else{updateHeader();go('dash');}
 
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
